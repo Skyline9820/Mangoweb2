@@ -111,6 +111,7 @@
         
         .hero-content { text-align: center; z-index: 1; max-width: 1000px; padding: 0 5%; display: flex; flex-direction: column; align-items: center;}
         .hero-content h2 { font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--mango); font-weight: 600; margin-bottom: 30px; }
+        .mobile-br { display: none; } /* Oculto en PC por defecto */
         .hero-content p { color: #DDD; font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto 40px; }
         .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; }
 
@@ -140,7 +141,7 @@
         .metodo-card { display: flex; gap: 30px; align-items: flex-start; background: rgba(255,255,255,0.03); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s; backdrop-filter: blur(10px); }
         .metodo-card:hover { transform: translateX(-20px); border-color: var(--mango); background: rgba(253, 234, 20, 0.05); }
         
-        /* --- NUEVO ESTILO PARA LOS NÚMEROS DE METODOLOGÍA --- */
+        /* --- ESTILO PARA LOS NÚMEROS DE METODOLOGÍA --- */
         .m-num { 
             font-size: 2.2rem; 
             font-family: 'Montserrat'; 
@@ -442,6 +443,9 @@
             .nav-links.active { left: 0; }
             .hero { height: 100svh !important; padding: 80px 5% 20px; }
             .hero-buttons { flex-direction: column; }
+            
+            .mobile-br { display: block; content: ""; }
+            
             .que-es-grid { grid-template-columns: 1fr; }
             .sticky-wrapper { flex-direction: column; }
             .sticky-left { position: relative; top: 0; width: 100%; text-align: center; }
@@ -511,7 +515,9 @@
             <img src="mbc.png" alt="Mango Business Center" style="width: 90%; max-width: 450px; height: auto; margin-bottom: 25px; filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.5));">
             
             <h1 style="display: none;">MANGO BUSINESS CENTER</h1>
-            <h2>El ecosistema que conecta la producción, la distribución y el talento.</h2>
+            
+            <h2>El ecosistema que conecta <br class="mobile-br">la producción, <br>la distribución y el talento.</h2>
+            
             <p>Somos el centro de operaciones donde las marcas crecen, los emprendedores escalan y el talento encuentra su lugar. Construimos una plataforma integral desde la maquila hasta la entrega directa.</p>
             
             <div class="hero-buttons">
@@ -661,16 +667,19 @@
         <div class="expansion-container">
             
             <div class="brand-card reveal delay-1">
-                <div class="card-num"></div>
+                <div class="card-num">01</div>
                 <h2>DELI BARRAS</h2>
                 <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main">
                 <img src="2mg.jpg" alt="Deli Barras Hover" class="product-img img-hover">
                 <div class="brand-desc">Snacks saludables líderes. Venta en línea y distribución minorista.</div>
-                <a href="#ventas" class="card-btn">Distribución</a>
+                
+                <!-- AQUÍ ESTÁ EL ENLACE CORREGIDO PARA GITHUB PAGES -->
+                <a href="Deli.html" class="card-btn">Distribución</a>
+                
             </div>
             
             <div class="brand-card reveal delay-2">
-                <div class="card-num"></div>
+                <div class="card-num">02</div>
                 <h2>SABOR MÍO</h2>
                 <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main">
                 <img src="SABOR-MÍO-DOS.jpg" alt="Sabor Mío Hover" class="product-img img-hover">
@@ -679,7 +688,7 @@
             </div>
             
             <div class="brand-card reveal delay-3">
-                <div class="card-num"></div>
+                <div class="card-num">03</div>
                 <h2>CAMPESINAS</h2>
                 <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main">
                 <img src="CAMPESINAS-DOS.jpg" alt="Campesinas Hover" class="product-img img-hover">
@@ -688,7 +697,7 @@
             </div>
             
             <div class="brand-card reveal delay-4">
-                <div class="card-num"></div>
+                <div class="card-num">04</div>
                 <h2>NANNÁ</h2>
                 <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main">
                 <img src="nanna-dos.jpg" alt="Nanná Hover" class="product-img img-hover">
