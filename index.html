@@ -3,982 +3,672 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mango BC | Industrial Excellence</title>
-    
+    <title>DeliBarras - La barra que se vende sola</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
+        /* ================= CSS PURO (Todo incluido) ================= */
         :root {
-            /* EL AMARILLO ELÉCTRICO Y PALETA LIMPIA */
-            --mango: #fdea14; 
-            --dark: #1C1C1C;  
-            --white: #FFFFFF;
-            --light-bg: #F5F5F7; 
-            /* Opacidad reducida para mejor efecto cristal */
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.2);
+            --primary-yellow: #FBBF24;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --dark-grey: #111111;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
-        body {
-            background-color: var(--light-bg);
-            color: var(--dark);
-            font-family: 'Open Sans', sans-serif;
-            overflow-x: hidden;
-            width: 100%;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { color: #1f2937; background-color: #ffffff; line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container-ancho { max-width: 1400px; margin: 0 auto; padding: 0 20px; width: 95%; }
 
-        h1, h2, h3, h4, .font-title { font-family: 'Montserrat', sans-serif; }
+        img { max-width: 100%; height: auto; display: block; }
 
-        /* PRELOADER */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--dark);
-            display: flex; justify-content: center; align-items: center; z-index: 9999999;
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
-        }
-        .loader-logo { width: 180px; animation: pulse 2s ease-in-out infinite; filter: brightness(0) invert(1); }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 30px rgba(253, 234, 20, 0.6)); } }
+        /* ----- HEADER ----- */
+        header { box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; background: white; z-index: 100; }
+        .nav-container { display: flex; justify-content: center; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-weight: 900; font-size: 1.5rem; color: #1f2937; text-decoration: none; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: #1f2937; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; transition: color 0.3s;}
+        .nav-links a:hover { color: #049c64; } 
+        .top-bar { background-color: #000; color: #fff; padding: 8px 0; text-align: center; font-size: 0.75rem; font-weight: 600; display: flex; justify-content: center; gap: 40px; }
 
-        /* =========================================================
-           NAVEGACIÓN EFECTO CRISTAL 
-           ========================================================= */
-        nav {
-            position: fixed; width: 90%; top: 20px; left: 5%; padding: 15px 30px; 
-            background: var(--glass-bg); 
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border); 
-            border-radius: 100px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            transition: all 0.4s ease;
-        }
-        .logo { text-decoration: none; display: flex; align-items: center; z-index: 1002; }
-        
-        .nav-logo { height: 35px; width: auto; object-fit: contain; }
-        
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; transition: color 0.3s; }
-        .nav-links a:hover { color: #888; }
-        
-        .nav-cta { background: var(--dark); color: var(--white) !important; padding: 10px 24px; border-radius: 50px; transition: 0.4s;}
-        .nav-cta:hover { background: var(--mango); color: var(--dark) !important; }
+        /* ----- BOTONES ----- */
+        .btn-yellow { display: inline-block; background-color: var(--primary-yellow); color: #000; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.2rem; transition: background 0.3s; border: none; cursor: pointer; }
+        .btn-yellow:hover { background-color: #f59e0b; }
+        .btn-black { display: inline-block; background-color: #111827; color: #fff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.1rem; margin-top: 20px; cursor: pointer; border: none; }
+        .btn-black:hover { background-color: #374151; }
 
-        /* HAMBURGUESA PARA MÓVIL */
-        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1002; }
-        .hamburger span { width: 30px; height: 3px; background-color: var(--dark); border-radius: 3px; transition: 0.4s; }
-
-        /* REVEAL ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; }
-
-        /* SECCIONES BASE */
-        section { padding: 120px 5%; position: relative; }
-        .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: var(--dark); margin-bottom: 20px; text-transform: uppercase; line-height: 1; text-align: center; }
-        .section-title span { color: var(--mango); }
-        .section-desc { font-size: 1.2rem; color: #555; max-width: 700px; margin-bottom: 60px; line-height: 1.8; text-align: center; margin-left: auto; margin-right: auto; }
-
-        /* BOTONES GLOBALES */
-        .btn-mango { background: var(--mango); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); display: inline-block; text-align: center; }
-        .btn-mango:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(253, 234, 20, 0.5); background: var(--white); }
-        
-        .btn-white { background: var(--white); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; display: inline-block; text-align: center; }
-        .btn-white:hover { transform: translateY(-5px); background: #eee; }
-
-        .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); padding: 16px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; display: inline-block; text-align: center; backdrop-filter: blur(5px); margin-top: 20px; }
-        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-5px); }
-
-        /* 1. HERO */
+        /* ----- HERO SECTION ACTUALIZADA ----- */
         .hero { 
-            height: 100vh; 
-            min-height: 700px; 
-            padding-top: 120px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
+            background-color: #049c64; 
+            color: white; 
             position: relative; 
             overflow: hidden; 
+            display: flex;
+            align-items: center;
+            min-height: 550px; 
         }
-        .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(28,28,28,0.9) 0%, rgba(28,28,28,0.6) 100%); z-index: -1; }
         
-        .hero-content { text-align: center; z-index: 1; max-width: 1000px; padding: 0 5%; display: flex; flex-direction: column; align-items: center;}
-        .hero-content h2 { font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--mango); font-weight: 600; margin-bottom: 30px; }
-        .mobile-br { display: none; } /* Oculto en PC por defecto */
-        .hero-content p { color: #DDD; font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto 40px; }
-        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; }
+        .hero-content { 
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-text { 
+            width: 50%; 
+            padding: 60px 0;
+            position: relative; 
+            z-index: 2; 
+        }
+        .stars { color: var(--primary-yellow); font-size: 1.5rem; margin-bottom: 10px; font-weight: bold; }
+        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero-desc { font-size: 1.1rem; font-weight: 600; margin-bottom: 30px; max-width: 500px; }
+        
+        .hero-image { 
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 45vw; /* Aumentado a 55vw para acercarla al texto */
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-image img { 
+            width: 60%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: left center; /* Forzamos a que se alinee a la izquierda */
+        }
 
-        /* 2. ¿QUÉ ES MANGO? */
-        .que-es { background: var(--white); padding: 150px 5%; }
-        .que-es-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto; align-items: center; }
-        
-        .narrativa-box .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 30px; text-align: left; }
-        .narrativa-box p { font-size: clamp(1.2rem, 2vw, 1.6rem); color: var(--dark); line-height: 1.8; font-weight: 300; }
-        .narrativa-box strong { color: var(--dark); font-weight: 700; background: rgba(253,234,20,0.4); padding: 4px 8px; border-radius: 6px; }
-        
-        .stats-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .bento-card { background: var(--light-bg); padding: 50px 30px; border-radius: 30px; transition: 0.4s; border: 1px solid rgba(0,0,0,0.03); text-align: left; }
-        .bento-card:hover { transform: translateY(-10px); background: var(--white); box-shadow: var(--shadow-hover); border-color: var(--mango);}
-        .bento-card h3 { font-size: clamp(3rem, 5vw, 4.5rem); color: var(--mango); line-height: 1; margin-bottom: 15px; letter-spacing: -2px; }
-        .bento-card p { font-size: 1rem; font-weight: 700; text-transform: uppercase; color: var(--dark); letter-spacing: 1px; }
+        /* ----- STATS SECTION ----- */
+        .stats { background-color: #44bcb4; padding: 15px 20px; } 
+        .stats-container { display: flex; justify-content: space-evenly; text-align: center; align-items: center; max-width: 1400px; margin: 0 auto; width: 100%; }
+        .stat-item { display: flex; align-items: center; gap: 12px; }
+        .stat-num { font-size: 3rem; font-weight: 900; }
+        .stat-text { font-size: 1rem; font-weight: 800; text-align: left; line-height: 1.2; }
 
-        /* 3. METODOLOGÍA */
-        .metodologia { background: var(--dark); color: var(--white); padding: 150px 5% 0; }
-        .sticky-wrapper { display: flex; max-width: 1400px; margin: 0 auto; gap: 5%; justify-content: space-between; align-items: flex-start; }
-        .sticky-left { position: sticky; top: 200px; width: 45%; padding-bottom: 150px; }
-        .sticky-left h2 { font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.05; margin-bottom: 20px; color: var(--white); text-align: left; }
-        .sticky-left h2 span { color: var(--mango); display: block; }
-        .sticky-left p { color: #AAA; font-size: 1.1rem; line-height: 1.6; max-width: 90%; text-align: left; }
+        /* ----- INTRO / DISTRIBUIDOR ----- */
+        .intro { padding: 80px 20px; text-align: center; overflow: visible; }
+        .intro-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; color: #1f2937; }
+        .intro-desc { font-size: 1rem; color: #4b5563; max-width: 800px; margin: 0 auto 60px auto; font-weight: 600; }
         
-        .scroll-right { width: 50%; display: flex; flex-direction: column; gap: 80px; margin-top: 260px; padding-bottom: 200px; }
-        .metodo-card { display: flex; gap: 30px; align-items: flex-start; background: rgba(255,255,255,0.03); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s; backdrop-filter: blur(10px); }
-        .metodo-card:hover { transform: translateX(-20px); border-color: var(--mango); background: rgba(253, 234, 20, 0.05); }
+        .features { display: flex; align-items: center; justify-content: center; max-width: 1100px; margin: 0 auto; }
+        .features-img { width: 500px; display: flex; justify-content: flex-end; flex-shrink: 0; position: relative; z-index: 1;}
+        .features-img img { width: 1400px !important; max-width: none !important; display: block; margin-right: -350px; } 
         
-        /* --- ESTILO PARA LOS NÚMEROS DE METODOLOGÍA --- */
-        .m-num { 
-            font-size: 2.2rem; 
-            font-family: 'Montserrat'; 
-            font-weight: 900; 
-            color: var(--dark); 
-            background: var(--mango); 
-            min-width: 75px; 
-            height: 75px; 
+        .features-list { width: 500px; text-align: left; padding-left: 30px; position: relative; z-index: 2; flex-shrink: 0; }
+        .feature-item { margin-bottom: 25px; }
+        .feature-title { font-weight: 900; font-size: 1.2rem; display: block; color: #111; margin-bottom: 5px;}
+        .feature-text { font-size: 0.9rem; color: #4b5563; }
+
+        /* ----- COMO FUNCIONA (CONTACTO AMARILLO) ----- */
+        .contacto-amarillo { background-color: #fcd41c; padding: 80px 20px; }
+        .contacto-grid { display: flex; gap: 40px; } 
+        .contacto-box { background-color: #fcfc6c; padding: 60px 50px; flex: 1; border-radius: 0; } 
+        .contacto-box h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 40px; text-align: center; line-height: 1.2;}
+        .steps-list { list-style: none; font-weight: 800; font-size: 1.1rem; line-height: 1.6; max-width: 400px; margin: 0 auto; }
+        .steps-list li { margin-bottom: 25px; display: flex; align-items: flex-start;}
+        .steps-list li span { font-weight: 900; margin-right: 10px; font-size: 1.2rem; }
+        .form-container-box { max-width: 500px; margin: 0 auto; }
+        .form-input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 2px solid #000; background-color: #bcb4b4; font-family: inherit; font-size: 0.9rem; border-radius: 0;}
+        .form-input::placeholder { color: #555; }
+        .checkbox-group { margin-bottom: 25px; font-weight: 600; font-size: 0.9rem; }
+        .checkbox-group p { margin-bottom: 10px; }
+        .checkbox-group label { display: block; margin-bottom: 5px; cursor: pointer; display: flex; align-items: center;}
+        .checkbox-group input { margin-right: 10px; width: 16px; height: 16px; border: 2px solid #000; }
+        .btn-enviar-cuadrado { background-color: #0f172a; color: #fff; padding: 15px 40px; text-decoration: none; font-weight: 900; font-size: 1.2rem; cursor: pointer; border: none; width: auto; min-width: 200px; display: block; margin: 0 auto; transition: background 0.3s;}
+
+        /* ----- OFERTA LIMITADA ----- */
+        .oferta-section { padding: 40px 20px; } 
+        .oferta-box { background-color: #ececec; padding: 40px 20px; text-align: center; max-width: 1400px; margin: 0 auto; border-radius: 0; overflow: hidden; }
+        .oferta-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 30px; }
+        .oferta-grid { display: flex; justify-content: center; gap: 60px; margin-bottom: 20px; max-width: 1000px; margin: 0 auto; }
+        .oferta-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        
+        .oferta-icon { width: 250px; height: 160px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; position: relative; }
+        .oferta-icon img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px !important; max-width: none !important; height: auto !important; z-index: 1; pointer-events: none; }
+        .oferta-text { font-weight: 900; font-size: 1.1rem; position: relative; z-index: 2; margin-bottom: 20px;}
+
+        /* ----- DELITEAM CON VIDEO REPRODUCTOR ----- */
+        .deliteam { padding: 80px 20px; max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 60px; }
+        .deliteam-text { flex: 1; text-align: right; }
+        .deliteam-title { font-size: 3rem; font-weight: 900; margin-bottom: 20px; }
+        .deliteam-subtitle { font-size: 1.2rem; font-weight: 900; margin-bottom: 20px; }
+        .deliteam-list { list-style: none; margin-bottom: 30px; line-height: 1.8; font-size: 1rem; }
+        .deliteam-ganancia { font-weight: 900; font-size: 1.2rem; margin-bottom: 30px; }
+        
+        .deliteam-video { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .celular-mockup { 
+            width: 280px; 
+            height: 550px; 
+            background: #000; 
+            border: 12px solid #333; 
+            border-radius: 35px; 
             display: flex; 
-            justify-content: center; 
             align-items: center; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 20px rgba(253, 234, 20, 0.15); 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            flex-shrink: 0; /* Evita que el número se aplaste si hay mucho texto */
-        }
-        
-        /* Efecto al pasar el mouse por encima de la tarjeta */
-        .metodo-card:hover .m-num { 
-            background: var(--white); 
-            transform: scale(1.1) rotate(-5deg); 
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .m-text h4 { font-size: 1.5rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        .m-text p { color: #CCC; font-size: 1.1rem; line-height: 1.7; font-weight: 300; }
-
-        /* =========================================================
-           4. UNIDADES DE NEGOCIO (TARJETAS 3D GIRATORIAS)
-           ========================================================= */
-        .unidades { background: var(--light-bg); overflow: hidden; } 
-        .carousel-nav { display: none; } 
-        .unidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; transition: transform 0.5s ease-in-out; }
-        
-        .unidad-card { perspective: 1500px; background: transparent; height: 480px; cursor: pointer; }
-        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
-        .unidad-card:hover .card-inner, .unidad-card.is-flipped .card-inner { transform: rotateY(180deg); }
-
-        .card-front, .card-back {
-            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-            border-radius: 30px; padding: 40px 30px; display: flex; flex-direction: column;
-            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.03); transition: 0.5s;
-        }
-
-        .card-front { background: var(--white); color: var(--dark); }
-        .unidad-card:hover .card-front { border-color: var(--mango); }
-        
-        /* Iconos de las tarjetas de negocio */
-        .u-icon { 
-            width: 120px; 
-            height: 120px; 
-            background: transparent; 
-            border-radius: 0; 
-            display: flex; 
             justify-content: center; 
-            align-items: center; 
-            margin: 0 auto 30px; 
-            overflow: visible; 
-            padding: 0; 
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
         }
-        
-        .u-icon img {
+        .celular-mockup video {
             width: 100%;
             height: 100%;
-            object-fit: contain; 
-        }
-
-        .card-front h3 { font-size: 1.8rem; margin-bottom: 10px; color: var(--dark); font-weight: 900; }
-        .card-front .u-sub { color: var(--dark); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; background: rgba(253, 234, 20, 0.3); display: inline-block; padding: 4px 10px; border-radius: 6px; align-self: center;}
-        .card-front p { color: #666; line-height: 1.7; flex-grow: 1; margin-bottom: 10px;}
-        .flip-hint { font-size: 0.8rem; color: var(--mango); font-weight: 700; text-transform: uppercase; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 5px;}
-
-        .card-back {
-            background: var(--dark); color: var(--white); transform: rotateY(180deg); justify-content: center;
-            align-items: flex-start; text-align: left; border-color: var(--mango);
-        }
-        .card-back h3 { color: var(--mango); font-size: 1.5rem; margin-bottom: 20px; font-weight: 900; }
-        .card-back ul { list-style: none; padding: 0; margin: 0; }
-        .card-back ul li { margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5; color: #EEE; display: flex; align-items: flex-start; gap: 10px; }
-        .card-back ul li::before { content: '✓'; color: var(--mango); font-weight: bold; font-size: 1.1rem; }
-
-        .carousel-container { position: relative; max-width: 1400px; margin: 0 auto; }
-        .carousel-track { display: flex; gap: 40px; transition: transform 0.5s ease; }
-        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #CCC; cursor: pointer; transition: 0.3s; }
-        .carousel-dot.active { background: var(--mango); transform: scale(1.2); }
-
-        /* =========================================================
-           4.5 SECCIÓN: MARCAS (Fondo Oscuro Sólido)
-           ========================================================= */
-        .marcas-expansion { 
-            background: var(--dark); 
-            color: var(--white); 
-            z-index: 3; 
-            flex-direction: column; 
-            padding-top: 120px; 
-            overflow: hidden; 
-        }
-        
-        .marcas-expansion .section-title { color: var(--white); }
-        .marcas-expansion .section-desc { color: #CCC; }
-
-        .bg-marquee { 
-            position: absolute; top: 50%; transform: translateY(-50%); 
-            white-space: nowrap; overflow: hidden; width: 100%; 
-            opacity: 0.03; z-index: 0; pointer-events: none;
-        }
-        
-        .marquee-content { 
-            display: inline-block; font-family: 'Montserrat'; font-weight: 900; 
-            font-size: 15vw; animation: marquee 25s linear infinite; 
-            color: var(--white); 
-        }
-        
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        
-        .expansion-container { 
-            display: flex; width: 94%; max-width: 1400px; height: 60vh; min-height: 500px; 
-            gap: 15px; align-items: center; z-index: 2; margin: 0 auto; 
-        }
-        
-        .brand-card { 
-            flex: 1; height: 100%; 
-            background: #252525; 
-            border-radius: 20px; 
-            padding: 40px; display: flex; flex-direction: column; 
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); position: relative; 
-            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255,255,255,0.05); 
-            justify-content: flex-end; 
-        }
-        
-        .brand-card::before { 
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.2)); 
-            opacity: 0; transition: opacity 0.6s ease; z-index: 1; 
-        }
-        
-        .card-num { 
-            font-family: 'Montserrat'; font-weight: 900; font-size: 1.2rem; color: #666; 
-            z-index: 2; transition: 0.6s; position: absolute; top: 30px; left: 30px; 
-            opacity: 0; 
-        }
-        .brand-card h2 { 
-            font-family: 'Montserrat'; font-weight: 900; font-size: 1.5rem; margin-top: 15px; 
-            color: var(--white); z-index: 2; transition: 0.6s; text-transform: uppercase; 
-            opacity: 0; transform: translateY(20px); 
-        }
-        .brand-desc { 
-            opacity: 0; transform: translateY(20px); transition: 0.6s; font-size: 0.95rem; 
-            color: #DDD; z-index: 2; font-family: 'Open Sans'; line-height: 1.5; margin-bottom: 15px;
-        }
-        
-        .product-img { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
             object-fit: cover; 
-            transition: opacity 0.8s ease, transform 0.8s ease; 
-            z-index: 0; 
-        }
-        
-        .img-main { opacity: 1; }
-        .img-hover { opacity: 0; transform: scale(1.05); }
-        
-        .card-btn { 
-            padding: 12px 20px; border: 2px solid var(--mango); color: var(--mango); 
-            text-decoration: none; font-size: 0.8rem; font-family: 'Montserrat'; font-weight: 700; 
-            text-align: center; opacity: 0; transition: 0.6s; z-index: 3; text-transform: uppercase; border-radius: 50px;
-        }
-        .card-btn:hover { background: var(--mango); color: var(--dark); }
-
-        /* Efectos Hover en PC (Arriba de 1200px) */
-        @media (min-width: 1201px) and (hover: hover) {
-            .brand-card:hover { flex: 2.5; border-color: var(--mango); }
-            .brand-card:hover::before { opacity: 1; }
-            
-            .brand-card:hover .card-num { color: var(--mango); opacity: 1; }
-            .brand-card:hover h2 { font-size: 2.5rem; color: var(--mango); opacity: 1; transform: translateY(0); }
-            .brand-card:hover .brand-desc, .brand-card:hover .card-btn { opacity: 1; transform: translateY(0); }
-            
-            .brand-card:hover .img-main { opacity: 0; transform: scale(1.1); } 
-            .brand-card:hover .img-hover { opacity: 1; transform: scale(1); }
         }
 
-        /* =========================================================
-           5. ÁREA DE VENTAS: CAPACIDAD EN ACCIÓN (Full Width y Texto Izq)
-           ========================================================= */
-        .capacidad-accion-container { background-color: var(--dark); color: var(--white); padding: 150px 5%; position: relative; }
-        .capacidad-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto; align-items: center; }
-        .capacidad-left { text-align: left; display: flex; flex-direction: column; gap: 40px; }
-        .capacidad-header h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; color: var(--white); }
-        .capacidad-header h2 span { color: var(--mango); }
-        .capacidad-header p { color: #AAA; font-size: 1.2rem; line-height: 1.6; max-width: 90%; }
-        .datos-clave-block { display: flex; flex-direction: column; gap: 20px; }
-        .datos-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; }
-        .datos-title span { color: var(--mango); }
-        .cat-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .feature-tag { background: #111; color: var(--white); padding: 25px 15px; border-radius: 16px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; text-align: center; transition: 0.4s; }
-        .feature-tag:hover { border-color: var(--mango); background: rgba(253, 234, 20, 0.05); transform: translateY(-5px); }
-        .f-icon { font-size: 2.5rem; line-height: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); }
-        .f-text { font-family: 'Open Sans'; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
-        .capacidad-right { display: flex; flex-direction: column; gap: 35px; align-items: center; text-align: center; }
-        .production-img { width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }
-        .growth-badge { display: flex; align-items: center; justify-content: center; gap: 15px; color: var(--mango); font-family: 'Montserrat'; font-size: 4rem; font-weight: 900; line-height: 1; }
-        .growth-badge .small-text { color: var(--white); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; text-align: left; }
-        .negotiation-block { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
-        .negotiation-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0; font-weight: 900; text-shadow: 0 0 15px rgba(253, 234, 20, 0.3); }
-        .negotiation-title span { color: var(--mango); }
-        .arrow-down { display: inline-block; font-size: 1.5rem; animation: bounceDown 1.5s infinite ease-in-out; }
-        @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
-        .negotiation-buttons { display: flex; gap: 15px; justify-content: center; width: 100%; flex-wrap: wrap; }
-        .btn-negotiate { flex: 1; min-width: 180px; max-width: 250px; background-color: var(--mango); color: var(--dark); border: none; border-radius: 50px; padding: 16px 20px; font-size: 0.95rem; font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
-        .btn-negotiate:hover { background-color: var(--white); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); }
+        /* ----- CARRUSEL DE PRODUCTOS ----- */
+        .productos-wrap { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
+        .carrusel-container { position: relative; width: 100%; overflow: hidden; }
+        .carrusel-wrapper { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+        .carrusel-wrapper::-webkit-scrollbar { display: none; }
+        .producto-box { flex: 0 0 calc(33.333% - 14px); display: flex; flex-direction: column; align-items: center; padding: 0; min-height: 400px; justify-content: center; scroll-snap-align: start; position: relative; }
+        .bg-verde { background-color: #bbf7d0; } .bg-amarillo { background-color: #fef08a; } .bg-azul { background-color: #bfdbfe; } .bg-rosa { background-color: #fecdd3; } .bg-naranja { background-color: #fed7aa; }
+        .producto-box img { height: 100%; width: 100%; object-fit: cover; } 
 
-        /* =========================================================
-           6. TALENTO
-           ========================================================= */
-        .talento { background: var(--white); padding-top: 80px; padding-bottom: 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .talento .section-desc { margin-bottom: 40px; }
-        .jobs-container { max-width: 1000px; margin: 0 auto; background: var(--light-bg); border-radius: 30px; padding: 30px 40px; box-shadow: var(--shadow-soft); width: 100%; }
-        .job-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: rgba(28,28,28,0.95); border-radius: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .job-row:last-child { margin-bottom: 0; }
-        .job-row:hover { transform: scale(1.02); background: var(--dark); border-color: var(--mango); box-shadow: 0 10px 20px rgba(0,0,0,0.2);}
-        .job-info h4 { font-size: 1.1rem; color: var(--white); margin-bottom: 5px; font-weight: 700; }
-        .job-info p { color: #BBB; font-size: 0.85rem; }
-        .job-btn { padding: 10px 25px; background: var(--mango); color: var(--dark); border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; text-align: center; border: 2px solid var(--mango); font-size: 0.9rem;}
-        .job-row:hover .job-btn { background: var(--white); border-color: var(--white); }
-        .talento-footer { text-align: center; margin-top: 30px; }
-        .talento-footer h3 { color: var(--dark); font-size: 1.2rem; margin-bottom: 5px; }
+        .carrusel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background-color: white; color: #333; border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .carrusel-btn:hover { transform: translateY(-50%) scale(1.1); }
+        .btn-prev { left: 15px; } .btn-next { right: 15px; }
 
-        /* =========================================================
-           7. FOOTER CORPORATIVO
-           ========================================================= */
-        footer { background: var(--dark); padding: 80px 5% 40px; color: var(--white); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1400px; margin: 0 auto; }
-        .footer-col h4 { color: var(--mango); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
-        .footer-col a { color: #AAA; text-decoration: none; display: block; margin-bottom: 15px; font-size: 0.9rem; transition: 0.3s; }
-        .footer-col a:hover { color: var(--white); transform: translateX(5px); }
-        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 30px; color: #666; font-size: 0.8rem; }
+        /* ----- CONFIANZA Y RESPALDO ----- */
+        .confianza { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
+        .confianza-title { text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 50px; }
+        .confianza-content { display: flex; align-items: center; gap: 50px; overflow: visible;}
+        .confianza-img { flex: 1; text-align: right; position: relative;}
+        .confianza-img img { max-width: 450px; width: 100%; display: inline-block; transform: scale(1.7); transform-origin: center right; z-index: 1; pointer-events: none; }
+        .confianza-list { flex: 1; list-style: none; font-weight: 600; line-height: 1.8; position: relative; z-index: 2; }
+        .confianza-list li { margin-bottom: 10px; }
+        .check-icon { color: #6b21a8; font-weight: 900; margin-right: 10px; }
 
-        /* =========================================================
-           AJUSTE PARA LAPTOPS Y PANTALLAS MEDIANAS (Hasta 1440px)
-           ========================================================= */
-        @media (max-width: 1440px) {
-            section { padding: 80px 5%; }
-            .que-es { padding: 80px 5%; }
-            .metodologia { padding: 100px 5% 0; }
-            .sticky-left { top: 120px; padding-bottom: 100px; }
-            .scroll-right { margin-top: 150px; padding-bottom: 100px; }
-            .unidad-card { height: 400px; }
-            .card-front, .card-back { padding: 30px 20px; }
+        /* ----- NUTRIMENTAL ----- */
+        .nutricion { background-color: #bcb4b4; padding: 100px 20px; }
+        .nutricion-container { display: flex; max-width: 1000px; margin: 0 auto; align-items: center; gap: 60px; }
+        .ticket-wrapper { flex: 1; position: relative; text-align: right; padding-right: 20px;}
+        .dispensador { width: 350px; height: 45px; background: linear-gradient(to bottom, #f0f0f0, #aaa); border-radius: 10px 10px 0 0; margin-left: auto; box-shadow: 0 5px 10px rgba(0,0,0,0.2); position: relative; z-index: 2; border-bottom: 4px solid #555;}
+        .ticket { width: 310px; background: #fff; margin-left: auto; margin-right: 20px; padding: 35px 25px; font-size: 0.85rem; font-weight: 700; color: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.15); position: relative; z-index: 1; top: -5px;}
+        .ticket::after { content: ""; position: absolute; bottom: -10px; left: 0; width: 100%; height: 10px; background: linear-gradient(-45deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%), linear-gradient(45deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%); background-size: 10px 20px; background-position: 0 -10px; z-index: 1;}
+        .ticket-row { display: flex; justify-content: space-between; margin-bottom: 7px; }
+        .ticket-title { text-align: center; font-weight: 900; margin-bottom: 18px; font-size: 1rem;}
+        .ticket hr { border: none; border-top: 1px dashed #ccc; margin: 12px 0; }
+        .nutricion-text { flex: 1.2; }
+        .nutricion-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 30px; }
+        .nutricion-list { list-style: none; }
+        .nutricion-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+        .nutricion-icon { min-width: 30px; height: 30px; border: 2px solid #333; border-radius: 5px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
+        .nutricion-desc { font-size: 0.95rem; color: #444; }
+        .nutricion-desc strong { color: #000; font-weight: 800; }
+
+        /* ----- TESTIMONIOS ----- */
+        .testimonios { padding: 80px 20px; text-align: center; }
+        .testimonios-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        .testimonios-line { width: 40px; height: 3px; background: #000; margin: 0 auto 20px auto; }
+        .testimonios-subtitle { font-size: 1.1rem; color: #444; margin-bottom: 50px; }
+        .testimonios-grid { display: flex; gap: 30px; } 
+        .testimonio-card { background-color: #bcb4b4; padding: 40px 30px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; font-size: 0.85rem; color: #222; line-height: 1.6; border-radius: 0; }
+        .testimonio-card p { margin-bottom: 15px; }
+        .testimonio-card strong { font-weight: 800; color: #000; }
+        .testimonio-autor { margin-top: 20px; font-size: 1.1rem; font-weight: 900; color: #000; text-align: center; }
+
+        /* ----- FOOTER ----- */
+        footer { background-color: #049c64; color: #111; padding: 60px 20px 20px 20px; }
+        .footer-container { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; gap: 40px; }
+        .footer-col { flex: 1; }
+        .footer-title { font-weight: 900; letter-spacing: 3px; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; }
+        .footer-line { width: 30px; height: 2px; background: #111; margin-bottom: 20px; }
+        .footer-dir { font-size: 0.9rem; font-weight: 600; margin-bottom: 30px; line-height: 1.8;}
+        .footer-logo-box { width: 180px; height: 100px; border: 4px solid #111; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.5rem; text-align: center; line-height: 1;}
+        .footer-form-title { font-weight: 900; font-size: 1.2rem; text-align: center; margin-bottom: 5px; }
+        .footer-form-subtitle { font-size: 0.8rem; text-align: center; font-weight: 600; margin-bottom: 20px; }
+        .footer-form-box { max-width: 350px; margin: 0 auto; }
+        .footer-input { width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #111; background-color: #049c64; font-family: inherit; color: #111; font-weight: 600;}
+        .footer-input::placeholder { color: #111; opacity: 0.7; }
+        .checkbox-group { margin-bottom: 25px; font-weight: 600; font-size: 0.9rem; }
+        .checkbox-group p { margin-bottom: 10px; }
+        .checkbox-group label { display: block; margin-bottom: 5px; cursor: pointer; display: flex; align-items: center;}
+        .checkbox-group input { margin-right: 10px; width: 16px; height: 16px; border: 2px solid #000; }
+        .btn-enviar-cuadrado { background-color: #0f172a; color: #fff; padding: 15px 40px; text-decoration: none; font-weight: 900; font-size: 1.2rem; cursor: pointer; border: none; width: auto; min-width: 200px; display: block; margin: 0 auto; transition: background 0.3s;}
+
+        .footer-social { display: flex; gap: 10px; margin-bottom: 30px; }
+        .social-icon { width: 35px; height: 35px; background: #111; color: #049c64; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; text-decoration: none;}
+        .footer-slogan { font-size: 1.1rem; font-weight: 900; text-align: right; line-height: 1.4; max-width: 250px; margin-left: auto;}
+        .footer-bottom { text-align: center; font-size: 0.75rem; font-weight: 600; padding-top: 40px; margin-top: 40px; }
+
+        /* ----- RESPONSIVO ----- */
+        @media (max-width: 900px) {
+            .hero { display: block; min-height: auto; padding: 0;}
+            .hero-content { flex-direction: column; text-align: center; align-items: center; }
+            .hero-text { 
+                width: 100%; 
+                max-width: 100%; 
+                padding: 40px 20px 0 20px; 
+            } 
             
-            .u-icon { 
-                width: 100px; 
-                height: 100px; 
-                margin: 0 auto 20px;
-                padding: 0; 
+            /* Ajustes en móvil para la imagen Hero: se vuelve relativa y se pone debajo */
+            .hero-image { 
+                position: relative;
+                width: 100%; 
+                height: 400px; 
+                margin-top: 30px; 
             }
-            .bento-card { padding: 40px 20px; }
-            .bento-card h3 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
-        }
-
-        /* =========================================================
-           AJUSTE PARA TABLETS (Hasta 1200px)
-           ========================================================= */
-        @media (max-width: 1200px) {
-            .expansion-container { flex-wrap: wrap; height: auto; justify-content: center; gap: 20px; padding: 0 10px; }
-            .brand-card { flex: 0 0 calc(50% - 10px); width: calc(50% - 10px); height: auto; min-height: 420px; align-items: center; text-align: center; padding: 40px 20px; justify-content: flex-end; }
-            
-            .brand-card::before { opacity: 0.85; } 
-            .brand-card .brand-desc, .brand-card .card-btn, .brand-card h2, .brand-card .card-num { opacity: 1 !important; transform: translateY(0) !important; position: relative; z-index: 5; }
-            .brand-card .card-num { position: absolute; }
-            .brand-card h2 { font-size: 1.8rem; color: var(--mango); margin-top: 0; }
-            
-            .brand-card .product-img { z-index: 0; }
-            
-            @media (hover: hover) {
-                .brand-card:hover { flex: 0 0 calc(50% - 10px); transform: translateY(-10px); border-color: var(--mango); }
-                .brand-card:hover .img-main { opacity: 0; transform: scale(1.1); } 
-                .brand-card:hover .img-hover { opacity: 1; transform: scale(1); }
-            }
-        }
-
-        /* Ajuste de seguridad para pantallas con poca altura */
-        @media (max-height: 800px) {
-            .hero-content img { width: 70% !important; max-width: 320px !important; margin-bottom: 15px !important; }
-            .hero-content p { font-size: 0.95rem; margin-bottom: 25px; }
-        }
-
-       /* =========================================
-           MAGIA RESPONSIVE (CELULAR Y TABLET)
-           ========================================= */
-        @media (max-width: 992px) {
-            nav { width: 100%; top: 0; left: 0; border-radius: 0; padding: 15px 5%; }
-            .hamburger { display: flex; }
-            .nav-links { position: fixed; top: 0; left: 100%; width: 100%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; gap: 40px; transition: 0.4s; z-index: 1001; }
-            .nav-links.active { left: 0; }
-            .hero { height: 100svh !important; padding: 80px 5% 20px; }
-            .hero-buttons { flex-direction: column; }
-            
-            .mobile-br { display: block; content: ""; }
-            
-            .que-es-grid { grid-template-columns: 1fr; }
-            .sticky-wrapper { flex-direction: column; }
-            .sticky-left { position: relative; top: 0; width: 100%; text-align: center; }
-            .scroll-right { width: 100%; margin-top: 0; }
-            
-            .unidades-grid { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; padding: 10px 5%; margin: 0 -5%; scrollbar-width: none; }
-            .unidad-card { flex: 0 0 85vw; scroll-snap-align: center; }
-            
-            .u-icon {
-                width: 90px; 
-                height: 90px;
-                margin: 0 auto 25px; 
-                padding: 0;
+            .hero-image img { 
+                width: 100%; 
+                height: 100%; 
+                object-fit: cover;
+                object-position: center; /* En móvil que se centre normal */
             }
 
-            .carousel-nav { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
-            .carousel-dot { width: 10px; height: 10px; background: #D0D0D0; border-radius: 50%; }
-            .carousel-dot.active { background: var(--mango); }
-
-            .marcas-expansion { padding-top: 80px; padding-bottom: 60px; }
-            .expansion-container { flex-direction: column; height: auto; gap: 30px; padding: 0 5%; width: 100%; align-items: center; }
-            .brand-card { flex: none; width: 100%; max-width: 400px; min-height: 480px; padding: 40px 30px; align-items: center; text-align: center; border-radius: 25px; justify-content: flex-end; }
-
-            .brand-card::before { opacity: 0.95; }
-            .brand-card h2 { font-size: 2rem; color: var(--mango); position: relative; z-index: 5; margin-top: 0; opacity: 1 !important; transform: translateY(0) !important;}
-            .brand-card .card-num { opacity: 1 !important; }
-            .brand-desc, .card-btn { opacity: 1 !important; transform: translateY(0) !important; position: relative; z-index: 5; display: block; }
-            .brand-card .card-btn { width: 100%; padding: 15px; }
-
-            .capacidad-grid { grid-template-columns: 1fr; }
-            .cat-features { grid-template-columns: 1fr; }
-            .job-row { flex-direction: column; text-align: center; gap: 15px; }
-            .job-btn { width: 100%; }
+            .stats-container, .features, .oferta-grid, .deliteam, .confianza-content, .nutricion-container, .testimonios-grid, .contacto-grid, .footer-container { flex-direction: column; text-align: center; }
+            .nav-links, .top-bar { display: none; }
+            .hero-title { font-size: 3rem; }
+            
+            .features { flex-direction: column; gap: 40px; }
+            .features-img { width: 100%; justify-content: center; }
+            .features-img img { width: 100% !important; max-width: 400px !important; margin: 0 auto; display: block; }
+            .features-list { width: 100%; text-align: center; padding-left: 0; }
+            .features-list a { display: inline-block; margin: 0 auto; }
+            
+            .stat-item { justify-content: center; margin-bottom: 20px;}
+            .deliteam-text, .ticket-wrapper { text-align: center; padding: 0;}
+            .dispensador, .ticket { margin: 0 auto; }
+            .nutricion-item { text-align: left; }
+            .footer-col { margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; text-align: center;}
+            .footer-line { margin: 0 auto 20px auto; }
+            .footer-slogan { text-align: center; margin: 0 auto; }
+            .footer-social { justify-content: center; }
+            .producto-box { flex: 0 0 100%; }
+            .oferta-icon { height: 250px; }
+            
+            .confianza-img { width: 100%; justify-content: center; text-align: center; }
+            .confianza-img img { max-width: 100%; transform: scale(1); transform-origin: center center; }
         }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <img src="Logos Vectorizados.png" class="loader-logo" alt="Cargando Mango BC">
-    </div>
-
-    <nav id="navbar">
-        <a href="#inicio" class="logo">
-            <img src="mbc.png" alt="Mango BC" class="nav-logo">
-        </a>
-        
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <header>
+        <div class="nav-container">
+            <nav class="nav-links">
+                <a href="#inicio">HOME</a>
+                <a href="#intro">DeliBarras</a>
+                <a href="#como-funciona">Distribuye Deli.</a>
+                <a href="#productos">Producto</a>
+                <a href="#nutricion">Contenido nutrimental</a>
+                <a href="#testimonios">Casos de éxito</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
         </div>
-        <div class="nav-links" id="nav-links">
-            <a href="#que-es" class="nav-item">¿QUÉ ES MANGO?</a>
-            <a href="#metodologia" class="nav-item">METODOLOGÍA</a>
-            <a href="#unidades" class="nav-item">UNIDADES</a>
-            <a href="#marcas" class="nav-item">MARCAS</a>
-            <a href="#ventas" class="nav-item">VENTAS</a>
-            <a href="#talento" class="nav-cta nav-item">BOLSA DE TRABAJO</a>
+        <div class="top-bar">
+            <span>Envío gratis en tu primer kit</span>
+            <span>Emprende fácilmente</span>
+            <span>Gran Margen de ganancia</span>
         </div>
-    </nav>
+    </header>
 
     <section class="hero" id="inicio">
-        <video class="hero-video" autoplay muted loop playsinline><source src="loopdeli.mp4" type="video/mp4"></video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content reveal">
-            <img src="mbc.png" alt="Mango Business Center" style="width: 90%; max-width: 450px; height: auto; margin-bottom: 25px; filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.5));">
-            
-            <h1 style="display: none;">MANGO BUSINESS CENTER</h1>
-            
-            <h2>El ecosistema que conecta <br class="mobile-br">la producción, <br>la distribución y el talento.</h2>
-            
-            <p>Somos el centro de operaciones donde las marcas crecen, los emprendedores escalan y el talento encuentra su lugar. Construimos una plataforma integral desde la maquila hasta la entrega directa.</p>
-            
-            <div class="hero-buttons">
-                <a href="#ventas" class="btn-mango">Soy socio comercial &rarr;</a>
-                <a href="#talento" class="btn-white">Quiero trabajar aquí &rarr;</a>
-                <a href="#unidades" class="btn-outline">Conoce nuestras unidades &darr;</a>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="stars">★★★★★ <span style="font-size:1rem; color:white; font-weight:600;">Las barritas más Delis de Mx.</span></div>
+                <h1 class="hero-title">La barra que se vende sola.</h1>
+                <p class="hero-desc">Hechas con avena, cacahuate, linaza, miel y fruta, nuestras barras son el equilibrio perfecto entre sabor y nutrición.</p>
+                <a href="#contacto" class="btn-yellow">Quiero ser distribuidor</a>
+            </div>
+            <div class="hero-image">
+                <img src="delis-sinfondo.png" alt="DeliBarras Principal">
             </div>
         </div>
     </section>
 
-    <section class="que-es" id="que-es">
-        <div class="que-es-grid">
-            <div class="narrativa-box reveal">
-                <h2 class="section-title">¿QUÉ ES <span>MANGO?</span></h2>
-                <p>Creemos que el crecimiento no tiene que ser complicado. Por eso hemos creado un modelo donde <strong>la producción, la logística y la comercialización</strong> conviven bajo un mismo entorno. Somos el aliado estratégico para que te enfoques en vender más.</p>
+    <section class="stats">
+        <div class="container-ancho stats-container">
+            <div class="stat-item">
+                <span class="stat-num">40%</span>
+                <span class="stat-text">de margen<br>de ganancia</span>
             </div>
-            <div class="stats-bento reveal delay-1">
-                <div class="bento-card"><h3>+10</h3><p>Años de experiencia</p></div>
-                <div class="bento-card"><h3>500k</h3><p>Productos al mes</p></div>
-                <div class="bento-card"><h3>+15k</h3><p>Puntos de venta</p></div>
-                <div class="bento-card"><h3>+50</h3><p>Marcas confían</p></div>
+            <div class="stat-item">
+                <span class="stat-num">10</span>
+                <span class="stat-text">años de<br>experiencia</span>
             </div>
-        </div>
-    </section>
-
-    <section class="metodologia" id="metodologia">
-        <div class="sticky-wrapper">
-            <div class="sticky-left reveal">
-                <h2>NUESTRA <span>METODOLOGÍA</span></h2>
-                <p>El proceso estratégico que nos permite escalar negocios de manera sostenida y eficiente en la industria alimentaria.</p>
-            </div>
-            <div class="scroll-right">
-                <div class="metodo-card reveal">
-                    <div class="m-num"></div>
-                    <div class="m-text">
-                        <h4>Entendemos el mercado</h4>
-                        <p>Analizamos datos, no corazonadas. Identificamos lo que el consumidor ya está buscando para lanzar productos con demanda real, no con suerte.</p>
-                    </div>
-                </div>
-                <div class="metodo-card reveal">
-                    <div class="m-num"></div>
-                    <div class="m-text">
-                        <h4>Operamos con eficiencia</h4>
-                        <p>Cada proceso está medido: desde la compra de insumos hasta la entrega final. Eso se traduce en tiempos ágiles y costos competitivos.</p>
-                    </div>
-                </div>
-                <div class="metodo-card reveal">
-                    <div class="m-num"></div>
-                    <div class="m-text">
-                        <h4>Construimos relaciones</h4>
-                        <p>Construimos con confianza. Nuestros socios comerciales no son clientes; son parte de nuestra red de crecimiento sólido a largo plazo.</p>
-                    </div>
-                </div>
+            <div class="stat-item">
+                <span class="stat-num">25%</span>
+                <span class="stat-text">de descuento en<br>primer compra</span>
             </div>
         </div>
     </section>
 
-    <section class="unidades" id="unidades">
-        <div class="reveal">
-            <h2 class="section-title">UNIDADES DE <br><span>NEGOCIO</span></h2>
-            <p class="section-desc">Soluciones integrales diseñadas para cada etapa del ecosistema alimentario.</p>
-        </div>
+    <section class="intro container" id="intro">
+        <h2 class="intro-title">¡Distribuye DeliBarras y haz crecer tu negocio con un producto de rotación semanal!</h2>
+        <p class="intro-desc">"Muchos emprendedores sueñan con un negocio rentable, pero se enfrentan a productos que no se venden, inventarios detenidos y altas inversiones que nunca regresan. Con DeliBarras puedes iniciar tu propio negocio con un producto probado, de alta rotación y con un mercado abierto. Esta es tu oportunidad de emprender con respaldo y crecer desde el primer día."</p>
         
-        <div class="carousel-container reveal delay-1">
-            <div class="unidades-grid" id="carousel-track">
-                
-                <div class="unidad-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-01.png" alt="Icono Franquicias"></div>
-                            <h3>Franquicias</h3>
-                            <div class="u-sub">Desarrollo e Inversión</div>
-                            <p>El modelo probado que te da autonomía sin empezar de cero. Producto validado, modelo operativo y acompañamiento continuo.</p>
-                            <div class="flip-hint">Ver beneficios ↺</div>
-                        </div>
-                        <div class="card-back">
-                            <h3>Beneficios Clave</h3>
-                            <ul>
-                                <li>Retorno de inversión (ROI) acelerado.</li>
-                                <li>Capacitación operativa y gerencial.</li>
-                                <li>Proveeduría de insumos garantizada.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="unidad-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-02.png" alt="Icono Marca Propia"></div>
-                            <h3>Marca Propia</h3>
-                            <div class="u-sub">Maquila para terceros</div>
-                            <p>Tu idea, nuestra fábrica. Nos encargamos desde la formulación hasta el empaque final con total confidencialidad.</p>
-                            <div class="flip-hint">Ver beneficios ↺</div>
-                        </div>
-                        <div class="card-back">
-                            <h3>Beneficios Clave</h3>
-                            <ul>
-                                <li>Ahorro total en compra de maquinaria.</li>
-                                <li>Capacidad de producción escalable.</li>
-                                <li>Procesos con certificaciones de calidad.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="unidad-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-03.png" alt="Icono Logistics"></div>
-                            <h3>Logistics</h3>
-                            <div class="u-sub">Entregas a retail</div>
-                            <p>Tu producto en puntos de venta sin complicaciones. Entregas directas a retail y servicio de última milla para empresas.</p>
-                            <div class="flip-hint">Ver beneficios ↺</div>
-                        </div>
-                        <div class="card-back">
-                            <h3>Beneficios Clave</h3>
-                            <ul>
-                                <li>Reducción de costos de flota propia.</li>
-                                <li>Monitoreo de envíos 24/7.</li>
-                                <li>Cobertura garantizada en retail.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="features">
+            <div class="features-img">
+                 <img src="delis.png" alt="DeliBarras Individuales">
             </div>
-            
-            <div class="carousel-nav" id="carousel-nav">
-                <div class="carousel-dot active" data-index="0"></div>
-                <div class="carousel-dot" data-index="1"></div>
-                <div class="carousel-dot" data-index="2"></div>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-title">Porción de gran tamaño</span>
+                    <span class="feature-text">Adicionada con vitaminas B1, B2, B3, B9, calcio, hierro, magnesio y zinc. La hacen un producto atractivo para tus clientes.</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-title">Fáciles de llevar:</span>
+                    <span class="feature-text">No necesitan refrigeración ni vitrinas.</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-title">Sustituye una comida completa</span>
+                    <span class="feature-text">Ideales para emprender, vender, ofrecer en puntos de venta o disfrutar para consumo personal.</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-title">Dos líneas:</span>
+                    <span class="feature-text">Tradicional y con relleno de Yogurt. 10 sabores en total. Más posibilidades = más ventas.</span>
+                </div>
+                <a href="#contacto" class="btn-black">Quiero ser distribuidor</a>
             </div>
         </div>
     </section>
 
-    <section class="marcas-expansion" id="marcas">
-        <div class="reveal">
-            <h2 class="section-title">NUESTRAS <br><span>MARCAS</span></h2>
-        </div>
-        
-        <div class="bg-marquee"><div class="marquee-content">MANGO BUSINESS CENTER — MANGO BUSINESS CENTER — </div></div>
-        
-        <div class="expansion-container">
-            
-            <div class="brand-card reveal delay-1">
-                <div class="card-num">01</div>
-                <h2>DELI BARRAS</h2>
-                <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main">
-                <img src="2mg.jpg" alt="Deli Barras Hover" class="product-img img-hover">
-                <div class="brand-desc">Snacks saludables líderes. Venta en línea y distribución minorista.</div>
-                
-                <!-- AQUÍ ESTÁ EL ENLACE CORREGIDO PARA GITHUB PAGES -->
-                <a href="Deli.html" class="card-btn">Distribución</a>
-                
+    <section class="contacto-amarillo" id="como-funciona">
+        <div class="container-ancho contacto-grid">
+            <div class="contacto-box">
+                <h2>¿Cómo<br>funciona?</h2>
+                <ul class="steps-list">
+                    <li><span>1.</span> Llena el formulario con tus datos o contáctanos por whatsapp</li>
+                    <li><span>2.</span> Te enviamos precios, catálogo y asesoría personalizada</li>
+                    <li><span>3.</span> Haces tu primer pedido con descuento</li>
+                    <li><span>4.</span> Empiezas a vender y ganar desde la primera semana.</li>
+                </ul>
             </div>
-            
-            <div class="brand-card reveal delay-2">
-                <div class="card-num">02</div>
-                <h2>SABOR MÍO</h2>
-                <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main">
-                <img src="SABOR-MÍO-DOS.jpg" alt="Sabor Mío Hover" class="product-img img-hover">
-                <div class="brand-desc">Empanizadores y mezclas industriales de alta gama.</div>
-                <a href="#ventas" class="card-btn">Ver Catálogo</a>
-            </div>
-            
-            <div class="brand-card reveal delay-3">
-                <div class="card-num">03</div>
-                <h2>CAMPESINAS</h2>
-                <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main">
-                <img src="CAMPESINAS-DOS.jpg" alt="Campesinas Hover" class="product-img img-hover">
-                <div class="brand-desc">Repostería premium y galletas de receta tradicional.</div>
-                <a href="#ventas" class="card-btn">Puntos de Venta</a>
-            </div>
-            
-            <div class="brand-card reveal delay-4">
-                <div class="card-num">04</div>
-                <h2>NANNÁ</h2>
-                <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main">
-                <img src="nanna-dos.jpg" alt="Nanná Hover" class="product-img img-hover">
-                <div class="brand-desc">Bebidas naturales y tecnología aplicada a la salud digestiva.</div>
-                <a href="#ventas" class="card-btn">Más Información</a>
-            </div>
-            
-             <div class="brand-card reveal delay-5">
-                <div class="card-num">05</div>
-                <h2>PRÓXIMAMENTE</h2>
-                <img src="proximamente.jpg" alt="Nuevos Lanzamientos" class="product-img img-main">
-                <img src="nuevos productos.jpg" alt="Próximamente Hover" class="product-img img-hover">
-                <div class="brand-desc">Descubre lo nuevo que tenemos preparado para ti este trimestre.</div>
-                <a href="#ventas" class="card-btn">Mantente al tanto</a>
+            <div class="contacto-box">
+                <h2>Favor de<br>llenar el<br>cuestionario:</h2>
+                <div class="form-container-box">
+                    <form>
+                        <input type="text" placeholder="Nombre" class="form-input">
+                        <input type="email" placeholder="Ingresa tu email aquí*" class="form-input">
+                        <input type="text" placeholder="Teléfono" class="form-input">
+                        <textarea placeholder="¿Comentarios o dudas?" class="form-input" rows="3"></textarea>
+                        
+                        <div class="checkbox-group">
+                            <p>Te interesa DeliBarras para: *</p>
+                            <label><input type="checkbox"> Punto de venta</label>
+                            <label><input type="checkbox"> Distribución</label>
+                        </div>
+                        <button type="submit" class="btn-enviar-cuadrado">ENVIAR</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="capacidad-accion-container" id="ventas">
-        <div class="capacidad-grid reveal">
-            
-            <div class="capacidad-left">
-                <div class="capacidad-header">
-                    <h2>CAPACIDAD EN <span>ACCIÓN</span></h2>
-                    <p>Nuestra línea Deli Barras es el ejemplo perfecto de lo que podemos hacer por ti. Un producto líder en el canal retail.</p>
+    <section class="oferta-section">
+        <div class="oferta-box">
+            <h2 class="oferta-title">Solo este mes, al convertirte<br>en distribuidor recibes:</h2>
+            <div class="oferta-grid">
+                <div class="oferta-item">
+                    <div class="oferta-icon">
+                        <img src="delibox.png" alt="Descuento en Caja">
+                    </div>
+                    <p class="oferta-text">30% de descuento en<br>tu primer pedido</p>
+                </div>
+                <div class="oferta-item">
+                    <div class="oferta-icon" style="border-radius: 50%; background-color: transparent;">
+                        <img src="poio.png" alt="Asesor DeliBarras">
+                    </div>
+                    <p class="oferta-text">2 meses de<br>acompañamiento<br>con asesor</p>
+                </div>
+                <div class="oferta-item">
+                    <div class="oferta-icon">
+                        <img src="delistand.png" alt="Exhibidores Incluidos">
+                    </div>
+                    <p class="oferta-text">Exhibidores incluidos</p>
+                </div>
+            </div>
+            <a href="#contacto" class="btn-black">Quiero ser distribuidor</a>
+        </div>
+    </section>
+
+    <section class="deliteam">
+        <div class="deliteam-text">
+            <h2 class="deliteam-title">#DeliTeam</h2>
+            <p class="deliteam-subtitle">Beneficios directos para tu<br>negocio:</p>
+            <ul class="deliteam-list">
+                <li>Margen de <strong>hasta el 40%</strong></li>
+                <li>Producto con <strong>rotación semanal</strong></li>
+                <li><strong>Envío a domicilio</strong> con cobertura nacional</li>
+                <li><strong>Kit de arranque +<br>asesoría personalizado</strong></li>
+            </ul>
+            <p class="deliteam-ganancia">Puedes ganar + de 35 mil pesos por ruta.</p>
+            <a href="#contacto" class="btn-black">Quiero ser distribuidor</a>
+        </div>
+        <div class="deliteam-video">
+            <div class="celular-mockup">
+                <video autoplay muted loop playsinline>
+                    <source src="delivideo.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="productos-wrap" id="productos">
+        <div class="carrusel-container">
+            <button class="carrusel-btn btn-prev" id="btnPrev">❮</button>
+            <div class="carrusel-wrapper" id="carruselWrapper">
+                
+                <div class="producto-box bg-verde">
+                    <img src="pera.jpg" alt="Barrita Pera">
                 </div>
                 
-                <div class="datos-clave-block">
-                    <h3 class="datos-title">DATOS CLAVE <br><span>DEL ÉXITO</span></h3>
-                    <div class="cat-features">
-                        <div class="feature-tag">
-                            <span class="f-icon">⭐</span>
-                            <span class="f-text">10g Proteína Pura</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">🍃</span>
-                            <span class="f-text">100% Ingredientes Naturales</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">📦</span>
-                            <span class="f-text">0% Azúcar Añadida</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">🏅</span>
-                            <span class="f-text">#1 en Ventas Retail</span>
-                        </div>
-                    </div>
+                <div class="producto-box bg-amarillo">
+                    <img src="pinacoco.jpg" alt="Barrita Piña Coco">
                 </div>
-            </div>
-
-            <div class="capacidad-right">
-                <img src="IMG8954.jpg" alt="Deli Barras en Producción" class="production-img">
                 
-                <div class="growth-badge">
-                    +30% 
-                    <span class="small-text">CRECIMIENTO<br>ANUAL</span>
+                <div class="producto-box bg-azul">
+                    <img src="blueberru.jpg" alt="Barrita Blueberry">
+                </div>
+                
+                <div class="producto-box bg-rosa">
+                    <img src="arandano.jpg" alt="Barrita Fresa/Arándano">
                 </div>
 
-                <div class="negotiation-block">
-                    <h3 class="negotiation-title">Hablemos de <span>negocios</span> <span class="arrow-down">↓</span></h3>
-                    <div class="negotiation-buttons">
-                        <a href="emprendedores.html" class="btn-negotiate">Emprendedores</a>
-                        <a href="distribuidores.html" class="btn-negotiate">Distribuidores</a>
+                <div class="producto-box bg-amarillo">
+                    <img src="pina.jpg" alt="Barrita Piña">
+                </div>
+
+                <div class="producto-box bg-naranja">
+                    <img src="durazno.jpg" alt="Barrita Durazno">
+                </div>
+
+            </div>
+            <button class="carrusel-btn btn-next" id="btnNext">❯</button>
+        </div>
+    </section>
+
+    <section class="confianza">
+        <h2 class="confianza-title">Confianza y respaldo: por qué sí<br>funcionamos</h2>
+        <div class="confianza-content">
+            <div class="confianza-img">
+                <img src="Delicaja.png" alt="Cajas de DeliBarras al mayoreo">
+            </div>
+            <ul class="confianza-list">
+                <li><span class="check-icon">✔</span> Más de <strong>300 distribuidores</strong> activos en México</li>
+                <li><span class="check-icon">✔</span> Presencia en <strong>130,000 puntos de venta</strong></li>
+                <li><span class="check-icon">✔</span> <strong>Cobertura nacional</strong> con envíos directos</li>
+                <li><span class="check-icon">✔</span> <strong>+10 años de experiencia</strong> en el mercado</li>
+                <li><span class="check-icon">✔</span> 200 personas trabajando para que <strong>tú vendas más</strong></li>
+                <li><span class="check-icon">✔</span> <strong>Acompañamiento comercial</strong> por territorio y zona</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="nutricion" id="nutricion">
+        <div class="nutricion-container">
+            <div class="ticket-wrapper">
+                <div class="dispensador"></div>
+                <div class="ticket">
+                    <div class="ticket-title">
+                        Porción 100g.<br>
+                        Contenido energético<br>
+                        430 Kcal (1800 kj)
                     </div>
+                    
+                    <div class="ticket-row"><span>Proteínas</span><span>.............12 g.</span></div>
+                    <hr>
+                    <div class="ticket-row"><span>Grasas totales</span><span>.............15 g.</span></div>
+                    <div class="ticket-row"><span>&nbsp;&nbsp;Grasas Saturadas</span><span>.......7 g.</span></div>
+                    <div class="ticket-row"><span>&nbsp;&nbsp;Grasas Trans</span><span>...............0 g.</span></div>
+                    <hr>
+                    <div class="ticket-row"><span>Hidratos de carbono</span><span>.....61 g.</span></div>
+                    <div class="ticket-row"><span>&nbsp;&nbsp;Azúcares</span><span>...................19 g.</span></div>
+                    <div class="ticket-row"><span>&nbsp;&nbsp;Azúcares añadidos</span><span>.....6 g.</span></div>
+                    <hr>
+                    <div class="ticket-row"><span>Fibra dietética</span><span>..............5 g.</span></div>
+                    <hr>
+                    <div class="ticket-row"><span>Sodio</span><span>..........................30mg.</span></div>
                 </div>
+            </div>
+            
+            <div class="nutricion-text">
+                <h2 class="nutricion-title">¿Que contienen?</h2>
+                <ul class="nutricion-list">
+                    <li class="nutricion-item">
+                        <div class="nutricion-icon">✔</div>
+                        <div class="nutricion-desc"><strong>Granola completa</strong> con avena, cacahuate, semilla de calabaza y linaza, que aportan fibra, proteína vegetal y energía natural.</div>
+                    </li>
+                    <li class="nutricion-item">
+                        <div class="nutricion-icon">✔</div>
+                        <div class="nutricion-desc"><strong>Miel de abeja y azúcar</strong> que dan el toque justo de dulzor y energía inmediata.</div>
+                    </li>
+                    <li class="nutricion-item">
+                        <div class="nutricion-icon">✔</div>
+                        <div class="nutricion-desc"><strong>Mermelada de fruta</strong> para un relleno delicioso y natural.</div>
+                    </li>
+                    <li class="nutricion-item">
+                        <div class="nutricion-icon">✔</div>
+                        <div class="nutricion-desc"><strong>Salvado de trigo y huevo</strong> que complementan con fibra y proteína para un snack más nutritivo.</div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section class="talento" id="talento">
-        <div class="reveal">
-            <h2 class="section-title">EL TALENTO <br><span>MUEVE A MANGO</span></h2>
-            <p class="section-desc">Buscamos personas que no solo quieran un empleo, sino que quieran construir. Autonomía, desarrollo y excelencia.</p>
-        </div>
+    <section class="testimonios" id="testimonios">
+        <h2 class="testimonios-title">Distribuidores que ya están creciendo con nosotros:</h2>
+        <div class="testimonios-line"></div>
+        <p class="testimonios-subtitle">Seas rutero o emprendedor, DeliBarras va contigo.</p>
         
-        <div class="jobs-container reveal delay-1">
-            <div class="job-row">
-                <div class="job-info">
-                    <h4>Ejecutivo de Cuentas Retail</h4>
-                    <p>Ubicación: Morelia | Tiempo Completo</p>
+        <div class="container-ancho testimonios-grid">
+            <div class="testimonio-card">
+                <div>
+                    <p>Acá en Mérida el calor pega, <strong>así que un producto sin refrigeración es oro.</strong></p>
+                    <p>Empecé chico, con miedo, pero <strong>el respaldo de Mango BC</strong> y todos los años que llevan, me dio confianza.</p>
+                    <p>Especialmente <strong>universidades y gimnasios la compran diario;</strong> más de uno la usa como 'comida rápida' y les encanta el sabor.</p>
+                    <p>No es magia, es constancia... <strong>y se vende.</strong></p>
                 </div>
-                <a href="mailto:talento@mangobusiness.com" class="job-btn">Postularme</a>
+                <div class="testimonio-autor">David Cachón<br>- Mérida MX.</div>
             </div>
-            <div class="job-row">
-                <div class="job-info">
-                    <h4>Coordinador Logístico</h4>
-                    <p>Ubicación: Morelia | Tiempo Completo</p>
+            
+            <div class="testimonio-card">
+                <div>
+                    <p>Yo ya traía ruta de botanas. <strong>Metí DeliBarras para probar y se movieron solas</strong> en tienditas y minisupers.</p>
+                    <p><strong>La marca no te suelta:</strong> te apoyan, te dan ideas y, conforme creces, te arropan más.</p>
+                    <p>A mí me funciona porque <strong>aguanta en almacén, no hay mermas y el margen sí se nota.</strong></p>
                 </div>
-                <a href="mailto:talento@mangobusiness.com" class="job-btn">Postularme</a>
+                <div class="testimonio-autor">Jorge Morales<br>-Tijuana</div>
             </div>
-            <div class="job-row">
-                <div class="job-info">
-                    <h4>Desarrollador Franquicias</h4>
-                    <p>Ubicación: Morelia | Tiempo Completo</p>
+
+            <div class="testimonio-card">
+                <div>
+                    <p>Empecé con poquita inversión y paciencia. No fue de un día para otro, pero <strong>con los tips de mi ejecutivo fui agarrando ritmo en las unis</strong> y el gym de la zona.</p>
+                    <p>Que no necesite refri me salvó mil veces y <strong>los exhibidores ayudan un buen: se ven y se venden.</strong> Hoy ya pido seguido porque la gente la busca.</p>
                 </div>
-                <a href="mailto:talento@mangobusiness.com" class="job-btn">Postularme</a>
+                <div class="testimonio-autor">Blanca Rodríguez<br>-San Luis Potosí</div>
             </div>
-            <div class="job-row">
-                <div class="job-info">
-                    <h4>Analista de Producción</h4>
-                    <p>Ubicación: Morelia | Tiempo Completo</p>
+
+            <div class="testimonio-card">
+                <div>
+                    <p><strong>Arranqué con diez mil pesos y sin carro propio.</strong> Fue pesado, pero la barra sí se mueve. Con el tiempo mis hijos se sumaron, montamos exhibidores y <strong>la rotación se volvió rutina.</strong></p>
+                    <p>Hoy movemos más de <strong>50 cajas por semana</strong> y ya compramos <strong>dos carros para la ruta.</strong></p>
+                    <p>Lo que valoro es que conforme creces, la marca te respalda y te abre puertas. No fue magia: fue constancia... y un producto que sale.</p>
                 </div>
-                <a href="mailto:talento@mangobusiness.com" class="job-btn">Postularme</a>
+                <div class="testimonio-autor">Leona Armenta<br>-Durango</div>
             </div>
-        </div>
-        
-        <div class="talento-footer reveal delay-2">
-            <h3 style="font-size: 1.2rem;">"No buscamos empleados, buscamos socios de alma."</h3>
-            <p style="color: #666; margin-bottom: 10px; font-size: 0.9rem;">Conéctate para futuras vacantes.</p>
-            <a href="mailto:talento@mangobusiness.com" style="color: var(--dark); font-weight: 700; text-decoration: underline;">talento@mangobusiness.com</a>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-grid reveal">
+    <footer id="contacto">
+        <div class="footer-container">
             <div class="footer-col">
-                <div class="footer-logo" style="margin-bottom: 20px;">
-                    <img src="Logos Vectorizados.png" alt="Mango BC" style="height: 50px; width: auto; filter: brightness(0) invert(1);">
+                <div class="footer-title">DIRECCIÓN</div>
+                <div class="footer-line"></div>
+                <div class="footer-dir">
+                    18 de Marzo 309B, 58190 Morelia, Mich.<br><br>
+                    +52 1 443 332 7430 Vía mensaje<br>
+                    WhatsApp
                 </div>
-                <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Morelia, Michoacán<br>México, CP 58000<br>+52 443 332 7430</p>
+                <div class="footer-logo-box">
+                    DELI<br><span style="font-size: 1rem;">Barras</span>
+                </div>
             </div>
+            
             <div class="footer-col">
-                <h4>Contacto Directo</h4>
-                <a href="mailto:socios@mangobusiness.com">Ventas y Socios</a>
-                <a href="mailto:talento@mangobusiness.com">Atracción de Talento</a>
-                <a href="mailto:compras@mangobusiness.com">Proveedores y Compras</a>
+                <div class="footer-form-box">
+                    <div class="footer-form-title">Favor de llenar el<br>cuestionario:</div>
+                    <div class="footer-form-subtitle">📦 Incluye catálogo, precios, kit de arranque<br>y asesoría personalizada.</div>
+                    <div class="footer-line" style="margin: 0 auto 20px auto;"></div>
+                    <form>
+                        <input type="text" placeholder="Nombre" class="footer-input">
+                        <input type="email" placeholder="Ingresa tu email aquí*" class="footer-input">
+                        <input type="text" placeholder="Teléfono" class="footer-input">
+                        <textarea placeholder="¿Comentarios o dudas?" class="footer-input" rows="2"></textarea>
+                        
+                        <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 15px;">
+                            <p>Te interesa DeliBarras para: *</p>
+                            <label style="display: block; margin-top:5px;"><input type="checkbox"> Punto de venta</label>
+                            <label style="display: block; margin-top:5px;"><input type="checkbox"> Distribución</label>
+                        </div>
+                        <button type="submit" class="btn-black" style="width: 100%; border-radius: 5px; background: #111;">ENVIAR</button>
+                    </form>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Redes Sociales</h4>
-                <a href="https://www.linkedin.com/company/mango-business-center" target="_blank">LinkedIn</a>
-                <a href="https://www.instagram.com/mangobusinesscenter" target="_blank">Instagram</a>
-                <a href="https://www.facebook.com/mangobusinesscenter" target="_blank">Facebook</a>
+
+            <div class="footer-col" style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div class="footer-title">SOCIAL</div>
+                <div class="footer-line" style="margin-left: auto; margin-right: 0;"></div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="https://api.whatsapp.com/send?phone=5214433327430&text=Hola%2C%20quiero%20DeliBarras%20%F0%9F%98%8D" class="social-icon">w</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+                <div class="footer-slogan">
+                    En Deli Barras ®<br>creamos productos<br>hechos 100% por manos<br>mexicanas, llenos de<br>sabor.
+                </div>
             </div>
         </div>
-        <div class="footer-bottom reveal delay-1">
-            © 2026 MANGO BUSINESS CENTER
+        
+        <div class="footer-bottom">
+            Property of DeliBarras® 2026. Powered by MANGO BC®
         </div>
     </footer>
 
+    <atom-plugin-web id="qyfb1ACMx9rrwWe5xJo7" company="GNUWhU5EoXzNaudxxYio"></atom-plugin-web>
+    <script src="https://atom-plugin-io.web.app/atom-plugin-web.js"></script>
+
     <script>
-        // 1. Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                document.getElementById('loader').style.visibility = 'hidden';
-            }, 1000);
+        // Lógica del Carrusel (Sin cambios)
+        const wrapper = document.getElementById('carruselWrapper');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+
+        btnPrev.addEventListener('click', () => {
+            const scrollAmount = wrapper.querySelector('.producto-box').offsetWidth + 20; 
+            wrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
 
-        // 2. Menú Móvil
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        const navItems = document.querySelectorAll('.nav-item');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.getElementById('navbar').classList.toggle('menu-open');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
-        });
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.getElementById('navbar').classList.remove('menu-open');
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        // 3. Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOptions = { threshold: 0.05, rootMargin: "0px 0px 50px 0px" };
-        
-        const revealObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            });
-        }, revealOptions);
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // 4. Lógica del Carrusel Móvil
-        if (window.innerWidth <= 992) {
-            const track = document.getElementById('carousel-track');
-            const dots = document.querySelectorAll('.carousel-dot');
-            const cards = track.querySelectorAll('.unidad-card');
-            const totalSlides = dots.length;
-            let currentIndex = 0;
-            let flipTimer, slideTimer, transitionTimer;
-            let carouselStarted = false;
-
-            const updateDots = (index) => {
-                dots.forEach(d => d.classList.remove('active'));
-                if(dots[index]) dots[index].classList.add('active');
-            };
-
-            const scrollToCard = (index) => {
-                if(!cards[index]) return;
-                const scrollPos = cards[index].offsetLeft - track.offsetLeft - (track.clientWidth - cards[index].clientWidth) / 2;
-                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
-                updateDots(index);
-                currentIndex = index;
-            };
-
-            const clearTimers = () => {
-                clearTimeout(flipTimer);
-                clearTimeout(slideTimer);
-                clearTimeout(transitionTimer);
-                cards.forEach(c => c.classList.remove('is-flipped'));
-            };
-
-            const startAutoPlay = () => {
-                clearTimers();
-                
-                flipTimer = setTimeout(() => {
-                    if(cards[currentIndex]) cards[currentIndex].classList.add('is-flipped');
-
-                    slideTimer = setTimeout(() => {
-                        if(cards[currentIndex]) cards[currentIndex].classList.remove('is-flipped');
-
-                        transitionTimer = setTimeout(() => {
-                            currentIndex = (currentIndex + 1) % totalSlides;
-                            scrollToCard(currentIndex);
-                            startAutoPlay(); 
-                        }, 300);
-
-                    }, 2000);
-
-                }, 3000);
-            };
-
-            dots.forEach((dot, idx) => {
-                dot.addEventListener('click', () => {
-                    scrollToCard(idx);
-                    if (carouselStarted) startAutoPlay(); 
-                });
-            });
-
-            track.addEventListener('scroll', () => {
-                const scrollLeft = track.scrollLeft;
-                const cardWidth = track.clientWidth; 
-                const index = Math.round(scrollLeft / cardWidth);
-                if (index !== currentIndex) {
-                    updateDots(index);
-                    currentIndex = index;
-                    if (carouselStarted) startAutoPlay(); 
-                }
-            });
-
-            const unidadesSection = document.getElementById('unidades');
-            const carouselObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !carouselStarted) {
-                    carouselStarted = true;
-                    startAutoPlay();
-                }
-            }, { threshold: 0.2 });
-
-            if (unidadesSection) {
-                carouselObserver.observe(unidadesSection);
-            }
-        }
-
-        // 5. Smart Navbar (Ocultar al hacer scroll hacia abajo, mostrar hacia arriba)
-        let lastScrollTop = 0;
-        const navbarElement = document.getElementById('navbar');
-
-        window.addEventListener('scroll', () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (navbarElement.classList.contains('menu-open')) {
-                return;
-            }
-
-            if (scrollTop > lastScrollTop && scrollTop > 80) {
-                navbarElement.style.transform = 'translateY(-150%)';
-            } else {
-                navbarElement.style.transform = 'translateY(0)';
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+        btnNext.addEventListener('click', () => {
+            const scrollAmount = wrapper.querySelector('.producto-box').offsetWidth + 20; 
+            wrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
     </script>
 </body>
