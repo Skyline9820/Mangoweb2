@@ -524,34 +524,100 @@
         }
 
         /* =========================================================
-           5. ÁREA DE VENTAS: CAPACIDAD EN ACCIÓN
+           5. NUEVA SECCIÓN DE VENTAS (EMPRENDE / DISTRIBUYE)
            ========================================================= */
-        .capacidad-accion-container { background-color: var(--dark); color: var(--white); padding: 150px 5%; position: relative; }
-        .capacidad-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; max-width: 1400px; margin: 0 auto; align-items: center; }
-        .capacidad-left { text-align: left; display: flex; flex-direction: column; gap: 40px; }
-        .capacidad-header h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; color: var(--white); }
-        .capacidad-header h2 span { color: var(--mango); }
-        .capacidad-header p { color: #AAA; font-size: 1.2rem; line-height: 1.6; max-width: 90%; }
-        .datos-clave-block { display: flex; flex-direction: column; gap: 20px; }
-        .datos-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; }
-        .datos-title span { color: var(--mango); }
-        .cat-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .feature-tag { background: #111; color: var(--white); padding: 25px 15px; border-radius: 16px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; text-align: center; transition: border-color 0.4s, background-color 0.4s, transform 0.4s; will-change: transform;}
-        .feature-tag:hover { border-color: var(--mango); background: rgba(253, 234, 20, 0.05); transform: translateY(-5px) translateZ(0); }
-        .f-icon { font-size: 2.5rem; line-height: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); }
-        .f-text { font-family: 'Open Sans'; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
-        .capacidad-right { display: flex; flex-direction: column; gap: 35px; align-items: center; text-align: center; }
-        .production-img { width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }
-        .growth-badge { display: flex; align-items: center; justify-content: center; gap: 15px; color: var(--mango); font-family: 'Montserrat'; font-size: 4rem; font-weight: 900; line-height: 1; }
-        .growth-badge .small-text { color: var(--white); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2; text-align: left; }
-        .negotiation-block { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
-        .negotiation-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0; font-weight: 900; text-shadow: 0 0 15px rgba(253, 234, 20, 0.3); }
-        .negotiation-title span { color: var(--mango); }
-        .arrow-down { display: inline-block; font-size: 1.5rem; animation: bounceDown 1.5s infinite ease-in-out; will-change: transform;}
-        @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
-        .negotiation-buttons { display: flex; gap: 15px; justify-content: center; width: 100%; flex-wrap: wrap; }
-        .btn-negotiate { flex: 1; min-width: 180px; max-width: 250px; background-color: var(--mango); color: var(--dark); border: none; border-radius: 50px; padding: 16px 20px; font-size: 0.95rem; font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; }
-        .btn-negotiate:hover { background-color: var(--white); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); }
+        .seccion-ventas {
+            padding: 150px 5%;
+            background-color: var(--dark);
+            color: var(--white);
+            position: relative;
+            text-align: center;
+        }
+        .ventas-header {
+            margin-bottom: 80px;
+        }
+        .ventas-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        .ventas-header h2 span { color: var(--mango); }
+        .ventas-header p {
+            font-size: 1.2rem;
+            color: #AAA;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .ventas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .venta-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+            will-change: transform;
+        }
+        .venta-card:hover {
+            transform: translateY(-10px) translateZ(0);
+            border-color: var(--mango);
+            background: rgba(253, 234, 20, 0.05);
+        }
+        .vc-icon {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            line-height: 1;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        }
+        .venta-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--mango);
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+        .venta-card p {
+            color: #DDD;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+        .btn-venta {
+            background-color: var(--mango);
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 40px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+        .btn-venta:hover {
+            background-color: var(--white);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3);
+        }
 
         /* =========================================================
            6. TALENTO (Acordeón)
@@ -685,8 +751,8 @@
             .brand-desc, .card-btn { opacity: 1 !important; transform: translateY(0) !important; position: relative; z-index: 5; display: block; }
             .brand-card .card-btn { width: 100%; padding: 15px; }
 
-            .capacidad-grid { grid-template-columns: 1fr; }
-            .cat-features { grid-template-columns: 1fr; }
+            /* Ajustes para la nueva sección de ventas en celular */
+            .ventas-grid { grid-template-columns: 1fr; }
             
             /* Ajustes para el acordeón en móviles */
             .job-header { flex-direction: column; text-align: center; gap: 15px; }
@@ -723,16 +789,6 @@
             background: linear-gradient(to bottom, rgba(28, 28, 28, 1) 0%, rgba(28, 28, 28, 0.7) 40%, transparent 100%);
             z-index: 0;
             pointer-events: none;
-        }
-        /* =========================================
-           EFECTO DE TARJETAS SUPERPUESTAS
-           ========================================= */
-        .que-es {
-            position: relative;
-            z-index: 10;
-            margin-top: -60px; /* Sube la sección para que "muerda" la parte final del video */
-            border-radius: 50px 50px 0 0; /* Redondea solo las esquinas superiores */
-            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.5); /* Sombra suave que se proyecta hacia arriba */
         }
 
     </style>
@@ -1033,53 +1089,25 @@
         </div>
     </section>
 
-    <section class="capacidad-accion-container" id="ventas">
-        <div class="capacidad-grid reveal">
-            
-            <div class="capacidad-left">
-                <div class="capacidad-header">
-                    <h2>CAPACIDAD EN <span>ACCIÓN</span></h2>
-                    <p>Nuestra línea Deli Barras es el ejemplo perfecto de lo que podemos hacer por ti. Un producto líder en el canal retail.</p>
-                </div>
-                
-                <div class="datos-clave-block">
-                    <h3 class="datos-title">DATOS CLAVE <br><span>DEL ÉXITO</span></h3>
-                    <div class="cat-features">
-                        <div class="feature-tag">
-                            <span class="f-icon">⭐</span>
-                            <span class="f-text">10g Proteína Pura</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">🍃</span>
-                            <span class="f-text">100% Ingredientes Naturales</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">📦</span>
-                            <span class="f-text">0% Azúcar Añadida</span>
-                        </div>
-                        <div class="feature-tag">
-                            <span class="f-icon">🏅</span>
-                            <span class="f-text">#1 en Ventas Retail</span>
-                        </div>
-                    </div>
-                </div>
+    <section class="seccion-ventas" id="ventas">
+        <div class="ventas-header reveal">
+            <h2>HABLEMOS DE <span>NEGOCIOS</span></h2>
+            <p>Únete a nuestra red. Ya sea que busques independizarte con un negocio probado o llevar nuestros productos a miles de nuevos clientes.</p>
+        </div>
+        
+        <div class="ventas-grid">
+            <div class="venta-card reveal delay-1">
+                <div class="vc-icon">🚀</div>
+                <h3>Quiero Emprender</h3>
+                <p>Inicia tu propio negocio respaldado por el ecosistema, productos de alta calidad y la metodología comprobada de Mango BC. Minimiza riesgos y maximiza ganancias.</p>
+                <a href="emprendedores.html" class="btn-venta">Plan Emprendedor</a>
             </div>
-
-            <div class="capacidad-right">
-                <img src="IMG8954.jpg" alt="Deli Barras en Producción" class="production-img" loading="lazy" decoding="async">
-                
-                <div class="growth-badge">
-                    +30% 
-                    <span class="small-text">CRECIMIENTO<br>ANUAL</span>
-                </div>
-
-                <div class="negotiation-block">
-                    <h3 class="negotiation-title">Hablemos de <span>negocios</span> <span class="arrow-down">↓</span></h3>
-                    <div class="negotiation-buttons">
-                        <a href="emprendedores.html" class="btn-negotiate">Emprendedores</a>
-                        <a href="distribuidores.html" class="btn-negotiate">Distribuidores</a>
-                    </div>
-                </div>
+            
+            <div class="venta-card reveal delay-2">
+                <div class="vc-icon">🤝</div>
+                <h3>Quiero Distribuir</h3>
+                <p>Conviértete en distribuidor oficial. Accede a precios especiales por volumen, soporte logístico y representa líneas de producto líderes en el mercado retail.</p>
+                <a href="distribuidores.html" class="btn-venta">Plan Distribuidor</a>
             </div>
         </div>
     </section>
