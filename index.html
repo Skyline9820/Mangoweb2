@@ -40,11 +40,86 @@
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--dark);
             display: flex; justify-content: center; align-items: center; z-index: 9999999;
+            /* OPTIMIZACIÓN: Solo animar opacity y visibility */
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), visibility 1s;
         }
-        .loader-logo { width: 180px; animation: pulse 2s ease-in-out infinite; filter: brightness(0) invert(1); }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 30px rgba(253, 234, 20, 0.6)); } }
+        .loader-logo { width: 180px; animation: pulse 2s ease-in-out infinite; filter: brightness(0) invert(1); will-change: transform, opacity; }
+        @keyframes pulse { 0%, 100% { transform: scale(1) translateZ(0); opacity: 0.8; } 50% { transform: scale(1.05) translateZ(0); opacity: 1; filter: drop-shadow(0 0 30px rgba(253, 234, 20, 0.6)); } }
 
+        /* =========================================================
+           0. SECCIÓN MANIFESTO (VIDEO + LOGO CASI INVISIBLE)
+           ========================================================= */
+        .manifesto-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #000;
+        }
+        .manifesto-video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        .manifesto-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .manifesto-logo {
+            width: 80%;
+            max-width: 550px;
+            opacity: 0.4;
+            filter: brightness(0) invert(1);
+            pointer-events: none;
+        }
+        .manifesto-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            opacity: 1;
+        }
+        .m-mouse {
+            width: 26px; height: 42px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            position: relative;
+        }
+        .m-mouse::before {
+            content: '';
+            width: 4px; height: 8px;
+            background: var(--mango);
+            position: absolute;
+            top: 8px; left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            animation: scroll-anim 2s infinite;
+            will-change: transform, opacity;
+        }
+        @keyframes scroll-anim {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 17px); }
+        }
         /* =========================================================
            NAVEGACIÓN EFECTO CRISTAL 
            ========================================================= */
@@ -56,7 +131,8 @@
             border-radius: 100px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            transition: all 0.4s ease;
+            /* OPTIMIZACIÓN: Se quitó el 'all' */
+            transition: transform 0.4s ease, background-color 0.4s ease;
         }
         .logo { text-decoration: none; display: flex; align-items: center; z-index: 1002; }
         
@@ -66,16 +142,22 @@
         .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.85rem; transition: color 0.3s; }
         .nav-links a:hover { color: #888; }
         
-        .nav-cta { background: var(--dark); color: var(--white) !important; padding: 10px 24px; border-radius: 50px; transition: 0.4s;}
+        .nav-cta { background: var(--dark); color: var(--white) !important; padding: 10px 24px; border-radius: 50px; transition: background-color 0.4s, color 0.4s;}
         .nav-cta:hover { background: var(--mango); color: var(--dark) !important; }
 
         /* HAMBURGUESA PARA MÓVIL */
         .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1002; }
-        .hamburger span { width: 30px; height: 3px; background-color: var(--dark); border-radius: 3px; transition: 0.4s; }
+        .hamburger span { width: 30px; height: 3px; background-color: var(--dark); border-radius: 3px; transition: transform 0.4s, opacity 0.4s; }
 
         /* REVEAL ANIMATIONS */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* OPTIMIZACIÓN: Reemplazo de 'all' por transform y opacity con GPU acceleration */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px) translateZ(0); 
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            will-change: opacity, transform;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0) translateZ(0); }
         .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; } .delay-5 { transition-delay: 0.5s; }
 
@@ -86,13 +168,13 @@
         .section-desc { font-size: 1.2rem; color: #555; max-width: 700px; margin-bottom: 60px; line-height: 1.8; text-align: center; margin-left: auto; margin-right: auto; }
 
         /* BOTONES GLOBALES */
-        .btn-mango { background: var(--mango); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); display: inline-block; text-align: center; border: none; cursor: pointer;}
+        .btn-mango { background: var(--mango); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: transform 0.4s, box-shadow 0.4s, background-color 0.4s; box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); display: inline-block; text-align: center; border: none; cursor: pointer;}
         .btn-mango:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(253, 234, 20, 0.5); background: var(--white); }
         
-        .btn-white { background: var(--white); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; display: inline-block; text-align: center; }
+        .btn-white { background: var(--white); color: var(--dark); padding: 18px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: transform 0.4s, background-color 0.4s; display: inline-block; text-align: center; }
         .btn-white:hover { transform: translateY(-5px); background: #eee; }
 
-        .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); padding: 16px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: 0.4s; display: inline-block; text-align: center; backdrop-filter: blur(5px); margin-top: 20px; }
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); padding: 16px 40px; border-radius: 50px; font-family: 'Montserrat'; font-weight: 700; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; transition: transform 0.4s, background-color 0.4s, border-color 0.4s; display: inline-block; text-align: center; backdrop-filter: blur(5px); margin-top: 20px; }
         .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-5px); }
 
         /* 1. HERO */
@@ -125,7 +207,7 @@
         .narrativa-box strong { color: var(--dark); font-weight: 700; background: rgba(253,234,20,0.4); padding: 4px 8px; border-radius: 6px; }
         
         /* TARJETAS BENTO 3D */
-        .stats-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .stats-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; position: relative; }
         
         .bento-flip-card { 
             background: transparent; 
@@ -139,8 +221,9 @@
             width: 100%; 
             height: 100%; 
             text-align: left; 
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             transform-style: preserve-3d;
+            will-change: transform; /* OPTIMIZACIÓN GPU */
         }
         
         .bento-flip-card:hover .bento-inner { 
@@ -160,7 +243,7 @@
             justify-content: center;
             box-shadow: var(--shadow-soft); 
             border: 1px solid rgba(0,0,0,0.03); 
-            transition: 0.5s;
+            transition: box-shadow 0.4s, border-color 0.4s, background-color 0.4s;
         }
         
         .bento-front {
@@ -192,18 +275,40 @@
         .bento-back ul li { margin-bottom: 8px; font-size: 0.9rem; color: #EEE; display: flex; align-items: center; gap: 8px; }
         .bento-back ul li::before { content: '✓'; color: var(--mango); font-weight: bold; }
         
-        /* Imagen de fondo para el mapa */
-        .bento-back.map-back { padding: 0; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 1px solid var(--mango);}
-        .map-img { 
-            position: absolute; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; /* <-- Cambio principal aquí */
-            opacity: 0.6; 
-            z-index: 0; 
-            transition: transform 0.5s ease; 
+        /* =========================================
+           TARJETA MAPA: GIRO, EXPANSIÓN Y CENTRADO
+           ========================================= */
+        #tarjeta-mapa {
+            z-index: 1;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
         }
-        .bento-flip-card:hover .map-img { transform: scale(1.1); }
+
+        #tarjeta-mapa:hover {
+            z-index: 100;
+            /* Se escala al tamaño completo y la empujamos para que no invada el texto a la izquierda */
+            transform: scale(1.6) translate(15%, -15%) translateZ(0); /* Aceleración GPU */
+        }
+
+        #tarjeta-mapa .bento-back.map-back {
+            padding: 0;
+            background-color: var(--white); /* Fondo limpio en caso de sobras */
+            border: 2px solid var(--mango);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #tarjeta-mapa .map-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: contain !important; /* Ajuste perfecto sin recortes */
+            opacity: 1 !important; 
+            transform: none !important; /* Adiós al zoom indeseado */
+            transition: none !important; 
+        }
         .map-text-overlay { position: relative; z-index: 1; background: rgba(28,28,28,0.85); padding: 10px 20px; border-radius: 50px; font-weight: 900; color: var(--mango); border: 1px solid var(--mango); backdrop-filter: blur(5px); text-transform: uppercase; font-family: 'Montserrat'; letter-spacing: 1px;}
 
 
@@ -216,8 +321,8 @@
         .sticky-left p { color: #AAA; font-size: 1.1rem; line-height: 1.6; max-width: 90%; text-align: left; }
         
         .scroll-right { width: 50%; display: flex; flex-direction: column; gap: 80px; margin-top: 260px; padding-bottom: 200px; }
-        .metodo-card { display: flex; gap: 30px; align-items: flex-start; background: rgba(255,255,255,0.03); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s; backdrop-filter: blur(10px); }
-        .metodo-card:hover { transform: translateX(-20px); border-color: var(--mango); background: rgba(253, 234, 20, 0.05); }
+        .metodo-card { display: flex; gap: 30px; align-items: flex-start; background: rgba(255,255,255,0.03); padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.5s, border-color 0.5s, background-color 0.5s; backdrop-filter: blur(10px); will-change: transform;}
+        .metodo-card:hover { transform: translateX(-20px) translateZ(0); border-color: var(--mango); background: rgba(253, 234, 20, 0.05); }
         
         /* --- NUEVO ESTILO PARA LOS NÚMEROS DE METODOLOGÍA --- */
         .m-num { 
@@ -233,13 +338,14 @@
             align-items: center; 
             border-radius: 20px; 
             box-shadow: 0 10px 20px rgba(253, 234, 20, 0.15); 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: background-color 0.4s, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
             flex-shrink: 0; 
+            will-change: transform;
         }
         
         .metodo-card:hover .m-num { 
             background: var(--white); 
-            transform: scale(1.1) rotate(-5deg); 
+            transform: scale(1.1) rotate(-5deg) translateZ(0); 
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
         }
 
@@ -254,13 +360,13 @@
         .unidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; transition: transform 0.5s ease-in-out; }
         
         .unidad-card { perspective: 1500px; background: transparent; height: 480px; cursor: pointer; }
-        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; will-change: transform; }
         .unidad-card:hover .card-inner, .unidad-card.is-flipped .card-inner { transform: rotateY(180deg); }
 
         .card-front, .card-back {
             position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden;
             border-radius: 30px; padding: 40px 30px; display: flex; flex-direction: column;
-            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.03); transition: 0.5s;
+            box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.03); transition: border-color 0.4s;
         }
 
         .card-front { background: var(--white); color: var(--dark); }
@@ -302,7 +408,7 @@
 
         .carousel-container { position: relative; max-width: 1400px; margin: 0 auto; }
         .carousel-track { display: flex; gap: 40px; transition: transform 0.5s ease; }
-        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #CCC; cursor: pointer; transition: 0.3s; }
+        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: #CCC; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
         .carousel-dot.active { background: var(--mango); transform: scale(1.2); }
 
         /* =========================================================
@@ -330,6 +436,9 @@
             display: inline-block; font-family: 'Montserrat'; font-weight: 900; 
             font-size: 15vw; animation: marquee 25s linear infinite; 
             color: var(--white); 
+            /* OPTIMIZACIÓN GPU PARA EL TEXTO CORREDIZO */
+            will-change: transform;
+            transform: translateZ(0);
         }
         
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -344,30 +453,35 @@
             background: #252525; 
             border-radius: 20px; 
             padding: 40px; display: flex; flex-direction: column; 
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); position: relative; 
+            /* OPTIMIZACIÓN: Solo animamos flex, bordes y transform, redujimos tiempo a 0.5s */
+            transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+            position: relative; 
             overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
             border: 1px solid rgba(255,255,255,0.05); 
             justify-content: flex-end; 
+            /* OPTIMIZACIÓN GPU */
+            will-change: flex, transform;
+            transform: translateZ(0);
         }
         
         .brand-card::before { 
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.2)); 
-            opacity: 0; transition: opacity 0.6s ease; z-index: 1; 
+            opacity: 0; transition: opacity 0.5s ease; z-index: 1; 
         }
         
         .card-num { 
             font-family: 'Montserrat'; font-weight: 900; font-size: 1.2rem; color: #666; 
-            z-index: 2; transition: 0.6s; position: absolute; top: 30px; left: 30px; 
+            z-index: 2; transition: opacity 0.5s, color 0.5s; position: absolute; top: 30px; left: 30px; 
             opacity: 0; 
         }
         .brand-card h2 { 
             font-family: 'Montserrat'; font-weight: 900; font-size: 1.5rem; margin-top: 15px; 
-            color: var(--white); z-index: 2; transition: 0.6s; text-transform: uppercase; 
+            color: var(--white); z-index: 2; transition: opacity 0.5s, transform 0.5s, font-size 0.5s, color 0.5s; text-transform: uppercase; 
             opacity: 0; transform: translateY(20px); 
         }
         .brand-desc { 
-            opacity: 0; transform: translateY(20px); transition: 0.6s; font-size: 0.95rem; 
+            opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; font-size: 0.95rem; 
             color: #DDD; z-index: 2; font-family: 'Open Sans'; line-height: 1.5; margin-bottom: 15px;
         }
         
@@ -377,9 +491,13 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* <-- Cambio principal aquí */
-            transition: opacity 0.8s ease, transform 0.8s ease; 
+            object-fit: contain; 
+            /* OPTIMIZACIÓN: Tiempo reducido a 0.5s */
+            transition: opacity 0.5s ease, transform 0.5s ease; 
             z-index: 0; 
+            /* OPTIMIZACIÓN GPU */
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
         
         .img-main { opacity: 1; }
@@ -388,7 +506,7 @@
         .card-btn { 
             padding: 12px 20px; border: 2px solid var(--mango); color: var(--mango); 
             text-decoration: none; font-size: 0.8rem; font-family: 'Montserrat'; font-weight: 700; 
-            text-align: center; opacity: 0; transition: 0.6s; z-index: 3; text-transform: uppercase; border-radius: 50px;
+            text-align: center; opacity: 0; transition: opacity 0.5s, transform 0.5s, background-color 0.4s, color 0.4s; z-index: 3; text-transform: uppercase; border-radius: 50px;
         }
         .card-btn:hover { background: var(--mango); color: var(--dark); }
 
@@ -398,11 +516,11 @@
             .brand-card:hover::before { opacity: 1; }
             
             .brand-card:hover .card-num { color: var(--mango); opacity: 1; }
-            .brand-card:hover h2 { font-size: 2.5rem; color: var(--mango); opacity: 1; transform: translateY(0); }
-            .brand-card:hover .brand-desc, .brand-card:hover .card-btn { opacity: 1; transform: translateY(0); }
+            .brand-card:hover h2 { font-size: 2.5rem; color: var(--mango); opacity: 1; transform: translateY(0) translateZ(0); }
+            .brand-card:hover .brand-desc, .brand-card:hover .card-btn { opacity: 1; transform: translateY(0) translateZ(0); }
             
-            .brand-card:hover .img-main { opacity: 0; transform: scale(1.1); } 
-            .brand-card:hover .img-hover { opacity: 1; transform: scale(1); }
+            .brand-card:hover .img-main { opacity: 0; transform: scale(1.1) translateZ(0); } 
+            .brand-card:hover .img-hover { opacity: 1; transform: scale(1) translateZ(0); }
         }
 
         /* =========================================================
@@ -418,8 +536,8 @@
         .datos-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; }
         .datos-title span { color: var(--mango); }
         .cat-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .feature-tag { background: #111; color: var(--white); padding: 25px 15px; border-radius: 16px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; text-align: center; transition: 0.4s; }
-        .feature-tag:hover { border-color: var(--mango); background: rgba(253, 234, 20, 0.05); transform: translateY(-5px); }
+        .feature-tag { background: #111; color: var(--white); padding: 25px 15px; border-radius: 16px; border: 1px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; text-align: center; transition: border-color 0.4s, background-color 0.4s, transform 0.4s; will-change: transform;}
+        .feature-tag:hover { border-color: var(--mango); background: rgba(253, 234, 20, 0.05); transform: translateY(-5px) translateZ(0); }
         .f-icon { font-size: 2.5rem; line-height: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); }
         .f-text { font-family: 'Open Sans'; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
         .capacidad-right { display: flex; flex-direction: column; gap: 35px; align-items: center; text-align: center; }
@@ -429,10 +547,10 @@
         .negotiation-block { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
         .negotiation-title { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0; font-weight: 900; text-shadow: 0 0 15px rgba(253, 234, 20, 0.3); }
         .negotiation-title span { color: var(--mango); }
-        .arrow-down { display: inline-block; font-size: 1.5rem; animation: bounceDown 1.5s infinite ease-in-out; }
+        .arrow-down { display: inline-block; font-size: 1.5rem; animation: bounceDown 1.5s infinite ease-in-out; will-change: transform;}
         @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
         .negotiation-buttons { display: flex; gap: 15px; justify-content: center; width: 100%; flex-wrap: wrap; }
-        .btn-negotiate { flex: 1; min-width: 180px; max-width: 250px; background-color: var(--mango); color: var(--dark); border: none; border-radius: 50px; padding: 16px 20px; font-size: 0.95rem; font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+        .btn-negotiate { flex: 1; min-width: 180px; max-width: 250px; background-color: var(--mango); color: var(--dark); border: none; border-radius: 50px; padding: 16px 20px; font-size: 0.95rem; font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; }
         .btn-negotiate:hover { background-color: var(--white); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3); }
 
         /* =========================================================
@@ -442,19 +560,20 @@
         .talento .section-desc { margin-bottom: 40px; }
         .jobs-container { max-width: 1000px; margin: 0 auto; background: var(--light-bg); border-radius: 30px; padding: 30px 40px; box-shadow: var(--shadow-soft); width: 100%; }
         
-        .job-card { background: rgba(28,28,28,0.95); border-radius: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; overflow: hidden; }
+        .job-card { background: rgba(28,28,28,0.95); border-radius: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s, box-shadow 0.3s; overflow: hidden; }
         .job-card:hover { border-color: var(--mango); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         
-        .job-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; cursor: pointer; transition: 0.3s; }
+        .job-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; cursor: pointer; transition: background-color 0.3s; }
         .job-info h4 { font-size: 1.1rem; color: var(--white); margin-bottom: 5px; font-weight: 700; }
         .job-info p { color: #BBB; font-size: 0.85rem; }
         
-        .job-btn-more { padding: 8px 25px; background: transparent; color: var(--mango); border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.3s; text-align: center; border: 2px solid var(--mango); font-size: 0.85rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+        .job-btn-more { padding: 8px 25px; background: transparent; color: var(--mango); border-radius: 50px; font-weight: 700; cursor: pointer; transition: background-color 0.3s, color 0.3s; text-align: center; border: 2px solid var(--mango); font-size: 0.85rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
         .job-header:hover .job-btn-more { background: var(--mango); color: var(--dark); }
         .job-card.open .job-btn-more { background: var(--mango); color: var(--dark); }
         
         /* Detalles ocultos por defecto */
-        .job-details { max-height: 0; padding: 0 30px; opacity: 0; transition: all 0.4s ease-in-out; color: #DDD; font-size: 0.95rem; line-height: 1.6; }
+        /* OPTIMIZACIÓN: Cambio de 'all' por propiedades puntuales */
+        .job-details { max-height: 0; padding: 0 30px; opacity: 0; transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out; color: #DDD; font-size: 0.95rem; line-height: 1.6; }
         .job-details p { margin-bottom: 12px; }
         .job-details strong { color: var(--mango); font-weight: 700; }
         
@@ -472,7 +591,7 @@
         footer { background: var(--dark); padding: 80px 5% 40px; color: var(--white); }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1400px; margin: 0 auto; }
         .footer-col h4 { color: var(--mango); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
-        .footer-col a { color: #AAA; text-decoration: none; display: block; margin-bottom: 15px; font-size: 0.9rem; transition: 0.3s; }
+        .footer-col a { color: #AAA; text-decoration: none; display: block; margin-bottom: 15px; font-size: 0.9rem; transition: color 0.3s, transform 0.3s; }
         .footer-col a:hover { color: var(--white); transform: translateX(5px); }
         .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; padding-top: 30px; color: #666; font-size: 0.8rem; }
 
@@ -511,9 +630,9 @@
             .brand-card .product-img { z-index: 0; }
             
             @media (hover: hover) {
-                .brand-card:hover { flex: 0 0 calc(50% - 10px); transform: translateY(-10px); border-color: var(--mango); }
-                .brand-card:hover .img-main { opacity: 0; transform: scale(1.1); } 
-                .brand-card:hover .img-hover { opacity: 1; transform: scale(1); }
+                .brand-card:hover { flex: 0 0 calc(50% - 10px); transform: translateY(-10px) translateZ(0); border-color: var(--mango); }
+                .brand-card:hover .img-main { opacity: 0; transform: scale(1.1) translateZ(0); } 
+                .brand-card:hover .img-hover { opacity: 1; transform: scale(1) translateZ(0); }
             }
         }
 
@@ -529,7 +648,7 @@
         @media (max-width: 992px) {
             nav { width: 100%; top: 0; left: 0; border-radius: 0; padding: 15px 5%; }
             .hamburger { display: flex; }
-            .nav-links { position: fixed; top: 0; left: 100%; width: 100%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; gap: 40px; transition: 0.4s; z-index: 1001; }
+            .nav-links { position: fixed; top: 0; left: 100%; width: 100%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; gap: 40px; transition: left 0.4s ease; z-index: 1001; }
             .nav-links.active { left: 0; }
             .hero { height: 100svh !important; padding: 80px 5% 20px; }
             .hero-buttons { flex-direction: column; }
@@ -574,6 +693,48 @@
             .job-btn-more { width: 100%; }
             .job-card.open .job-details { padding: 20px 15px; }
         }
+        /* =========================================
+           FUSIÓN DE VIDEOS (VERSIÓN POTENCIADA)
+           ========================================= */
+        
+        /* 1. Sombra oscura al final del primer video (Más alta e intensa) */
+        .manifesto-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%; /* Subimos la sombra hasta la mitad de la pantalla */
+            /* Agregamos paradas de color para que el negro se espese antes de llegar al borde */
+            background: linear-gradient(to bottom, transparent 0%, rgba(28, 28, 28, 0.7) 60%, rgba(28, 28, 28, 1) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* 2. Sombra oscura al inicio del segundo video (Más profunda) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%; /* Hacemos que el degradado baje más en la segunda sección */
+            /* El color denso dura más tiempo arriba antes de hacerse transparente */
+            background: linear-gradient(to bottom, rgba(28, 28, 28, 1) 0%, rgba(28, 28, 28, 0.7) 40%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* =========================================
+           EFECTO DE TARJETAS SUPERPUESTAS
+           ========================================= */
+        .que-es {
+            position: relative;
+            z-index: 10;
+            margin-top: -60px; /* Sube la sección para que "muerda" la parte final del video */
+            border-radius: 50px 50px 0 0; /* Redondea solo las esquinas superiores */
+            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.5); /* Sombra suave que se proyecta hacia arriba */
+        }
+
     </style>
 </head>
 <body>
@@ -581,7 +742,18 @@
     <div id="loader">
         <img src="Logos Vectorizados.png" class="loader-logo" alt="Cargando Mango BC">
     </div>
-
+<section class="manifesto-section" id="manifesto">
+        <video class="manifesto-video" autoplay muted loop playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div class="manifesto-content reveal">
+            <img src="mbc.png" alt="Mango BC" class="manifesto-logo">
+        </div>
+        <a href="#inicio" class="manifesto-scroll">
+            <span>SCROLL</span>
+            <div class="m-mouse"></div>
+        </a>
+    </section>
     <nav id="navbar">
         <a href="#inicio" class="logo">
             <img src="mbc.png" alt="Mango BC" class="nav-logo">
@@ -662,19 +834,18 @@
                     </div>
                 </div>
 
-                <div class="bento-flip-card">
-                    <div class="bento-inner">
+                <div class="bento-flip-card" id="tarjeta-mapa"> <div class="bento-inner">
                         <div class="bento-front">
                             <h3>+15k</h3>
                             <p>Puntos de venta</p>
                             <div class="flip-hint-bento">↺</div>
                         </div>
                         <div class="bento-back map-back">
-                            <img src="mapa.jpg" alt="Mapa de cobertura" class="map-img">
+                            <img src="mapa.jpg" alt="Mapa de cobertura" class="map-img" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="bento-flip-card">
                     <div class="bento-inner">
                         <div class="bento-front">
@@ -739,8 +910,7 @@
                 <div class="unidad-card">
                     <div class="card-inner">
                         <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-01.png" alt="Icono Franquicias"></div>
+                            <div class="u-icon"><img src="iconos-1-01.png" alt="Icono Franquicias" loading="lazy" decoding="async"></div>
                             <h3>Franquicias</h3>
                             <div class="u-sub">Desarrollo e Inversión</div>
                             <p>El modelo probado que te da autonomía sin empezar de cero. Producto validado, modelo operativo y acompañamiento continuo.</p>
@@ -760,8 +930,7 @@
                 <div class="unidad-card">
                     <div class="card-inner">
                         <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-02.png" alt="Icono Marca Propia"></div>
+                            <div class="u-icon"><img src="iconos-1-02.png" alt="Icono Marca Propia" loading="lazy" decoding="async"></div>
                             <h3>Marca Propia</h3>
                             <div class="u-sub">Maquila para terceros</div>
                             <p>Tu idea, nuestra fábrica. Nos encargamos desde la formulación hasta el empaque final con total confidencialidad.</p>
@@ -781,8 +950,7 @@
                 <div class="unidad-card">
                     <div class="card-inner">
                         <div class="card-front">
-                            
-                            <div class="u-icon"><img src="iconos-1-03.png" alt="Icono Logistics"></div>
+                            <div class="u-icon"><img src="iconos-1-03.png" alt="Icono Logistics" loading="lazy" decoding="async"></div>
                             <h3>Logistics</h3>
                             <div class="u-sub">Entregas a retail</div>
                             <p>Tu producto en puntos de venta sin complicaciones. Entregas directas a retail y servicio de última milla para empresas.</p>
@@ -821,8 +989,8 @@
             <div class="brand-card reveal delay-1">
                 <div class="card-num"></div>
                 <h2>DELI BARRAS</h2>
-                <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main">
-                <img src="2mg.jpg" alt="Deli Barras Hover" class="product-img img-hover">
+                <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="2mg.jpg" alt="Deli Barras Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Snacks saludables líderes. Venta en línea y distribución minorista.</div>
                 <a href="#ventas" class="card-btn">Distribución</a>
             </div>
@@ -830,8 +998,8 @@
             <div class="brand-card reveal delay-2">
                 <div class="card-num"></div>
                 <h2>SABOR MÍO</h2>
-                <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main">
-                <img src="SABOR-MÍO-DOS.jpg" alt="Sabor Mío Hover" class="product-img img-hover">
+                <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="SABOR-MÍO-DOS.jpg" alt="Sabor Mío Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Empanizadores y mezclas industriales de alta gama.</div>
                 <a href="#ventas" class="card-btn">Ver Catálogo</a>
             </div>
@@ -839,8 +1007,8 @@
             <div class="brand-card reveal delay-3">
                 <div class="card-num"></div>
                 <h2>CAMPESINAS</h2>
-                <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main">
-                <img src="CAMPESINAS-DOS.jpg" alt="Campesinas Hover" class="product-img img-hover">
+                <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="CAMPESINAS-DOS.jpg" alt="Campesinas Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Repostería premium y galletas de receta tradicional.</div>
                 <a href="#ventas" class="card-btn">Puntos de Venta</a>
             </div>
@@ -848,8 +1016,8 @@
             <div class="brand-card reveal delay-4">
                 <div class="card-num"></div>
                 <h2>NANNÁ</h2>
-                <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main">
-                <img src="nanna-dos.jpg" alt="Nanná Hover" class="product-img img-hover">
+                <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="nanna-dos.jpg" alt="Nanná Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Bebidas naturales y tecnología aplicada a la salud digestiva.</div>
                 <a href="#ventas" class="card-btn">Más Información</a>
             </div>
@@ -857,8 +1025,8 @@
              <div class="brand-card reveal delay-5">
                 <div class="card-num"></div>
                 <h2>PRÓXIMAMENTE</h2>
-                <img src="proximamente.jpg" alt="Nuevos Lanzamientos" class="product-img img-main">
-                <img src="nuevos productos.jpg" alt="Próximamente Hover" class="product-img img-hover">
+                <img src="proximamente.jpg" alt="Nuevos Lanzamientos" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="nuevos productos.jpg" alt="Próximamente Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Descubre lo nuevo que tenemos preparado para ti este trimestre.</div>
                 <a href="#ventas" class="card-btn">Mantente al tanto</a>
             </div>
@@ -898,7 +1066,7 @@
             </div>
 
             <div class="capacidad-right">
-                <img src="IMG8954.jpg" alt="Deli Barras en Producción" class="production-img">
+                <img src="IMG8954.jpg" alt="Deli Barras en Producción" class="production-img" loading="lazy" decoding="async">
                 
                 <div class="growth-badge">
                     +30% 
@@ -1009,7 +1177,7 @@
         <div class="footer-grid reveal">
             <div class="footer-col">
                 <div class="footer-logo" style="margin-bottom: 20px;">
-                    <img src="Logos Vectorizados.png" alt="Mango BC" style="height: 50px; width: auto; filter: brightness(0) invert(1);">
+                    <img src="Logos Vectorizados.png" alt="Mango BC" style="height: 50px; width: auto; filter: brightness(0) invert(1);" loading="lazy" decoding="async">
                 </div>
                 <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Morelia, Michoacán<br>México, CP 58000<br>+52 443 332 7430</p>
             </div>
@@ -1032,12 +1200,18 @@
     </footer>
 
     <script>
-        // 1. Preloader
-        window.addEventListener('load', () => {
+// 1. Preloader (Versión rápida)
+        // Usamos DOMContentLoaded para que no espere a que baje todo el video pesado
+        document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
-                document.getElementById('loader').style.visibility = 'hidden';
-            }, 1000);
+                
+                // Le damos 1 segundo extra a la transición antes de ocultarlo por completo
+                setTimeout(() => {
+                    document.getElementById('loader').style.visibility = 'hidden';
+                }, 1000);
+                
+            }, 1800); // Aparece 0.8 segundos y se va
         });
 
         // 2. Menú Móvil
@@ -1201,6 +1375,7 @@
                 }
             });
         });
+
     </script>
 </body>
 </html>
