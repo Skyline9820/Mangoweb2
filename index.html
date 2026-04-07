@@ -524,100 +524,82 @@
         }
 
         /* =========================================================
-           5. NUEVA SECCIÓN DE VENTAS (EMPRENDE / DISTRIBUYE)
+           5. NUEVA SECCIÓN DE VENTAS (MODIFICADA: CORPORATIVA Y COMPACTA)
            ========================================================= */
         .seccion-ventas {
-            padding: 150px 5%;
+            padding: 80px 5%; /* Ajustado para mejor visibilidad en un solo pantallazo */
             background-color: var(--dark);
             color: var(--white);
             position: relative;
             text-align: center;
+            overflow: hidden;
         }
         .ventas-header {
-            margin-bottom: 80px;
+            margin-bottom: 50px; /* Reducido */
         }
         .ventas-header h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-size: clamp(2rem, 4vw, 3rem); /* Fuente ligeramente más contenida */
             font-weight: 900;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             color: var(--white);
         }
         .ventas-header h2 span { color: var(--mango); }
         .ventas-header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #AAA;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
         }
-        .ventas-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        .glow-card { position: relative; z-index: 1; }
+        .glow-card::before {
+            content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--mango), #ff8a00, var(--mango));
+            z-index: -1; border-radius: 32px; filter: blur(12px); opacity: 0.7; transition: all 0.4s ease;
         }
-        .venta-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
+        .glow-card:hover::before { opacity: 1; filter: blur(20px); top: -4px; left: -4px; right: -4px; bottom: -4px; }
+        
+        .ventas-grid-dios { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px; /* Espaciado ajustado */
+            max-width: 1200px; 
+            margin: 0 auto; 
             align-items: center;
+        }
+        
+        .venta-dios-card {
+            background: rgba(28,28,28,0.95); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px; padding: 40px 30px; /* Padding reducido */
+            display: flex; flex-direction: column;
             transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
-            will-change: transform;
+            position: relative; text-align: left;
+            height: 100%;
         }
-        .venta-card:hover {
-            transform: translateY(-10px) translateZ(0);
-            border-color: var(--mango);
-            background: rgba(253, 234, 20, 0.05);
+        .venta-dios-card:hover {
+            transform: translateY(-8px) translateZ(0); border-color: var(--mango); background: rgba(253, 234, 20, 0.05);
         }
-        .vc-icon {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-            line-height: 1;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        .vd-badge {
+            position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+            background: var(--mango); color: var(--dark); font-size: 0.75rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 1px; padding: 6px 20px; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(253, 234, 20, 0.3);
         }
-        .venta-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: var(--mango);
-            text-transform: uppercase;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-        }
-        .venta-card p {
-            color: #DDD;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            flex-grow: 1;
-        }
-        .btn-venta {
-            background-color: var(--mango);
-            color: var(--dark);
-            border: none;
-            border-radius: 50px;
-            padding: 18px 40px;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 320px;
-        }
-        .btn-venta:hover {
-            background-color: var(--white);
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(253, 234, 20, 0.3);
-        }
+        .vd-features { list-style: none; margin: 20px 0; padding: 0; flex-grow: 1; }
+        .vd-features li { color: #DDD; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
+        .vd-features li::before { content: '✓'; color: var(--mango); font-weight: 900; }
+        
+        .prueba-social-ventas { margin-top: 50px; text-align: center; } /* Margen reducido */
+        .prueba-social-ventas p { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 700; }
+        .testimonios-pill { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .t-pill { background: rgba(255,255,255,0.05); padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px; transition: transform 0.3s; cursor: default; }
+        .t-pill:hover { transform: translateY(-3px); border-color: var(--mango); }
+        .t-stars { color: var(--mango); letter-spacing: 2px; font-size: 1rem; }
+        .t-text { color: var(--white); font-size: 0.85rem; font-weight: 600; }
 
         /* =========================================================
            6. TALENTO (Acordeón)
@@ -752,7 +734,8 @@
             .brand-card .card-btn { width: 100%; padding: 15px; }
 
             /* Ajustes para la nueva sección de ventas en celular */
-            .ventas-grid { grid-template-columns: 1fr; }
+            .ventas-grid-dios { grid-template-columns: 1fr; gap: 30px; }
+            .venta-dios-card.glow-card { transform: scale(1); margin: 15px 0; }
             
             /* Ajustes para el acordeón en móviles */
             .job-header { flex-direction: column; text-align: center; gap: 15px; }
@@ -1091,23 +1074,65 @@
 
     <section class="seccion-ventas" id="ventas">
         <div class="ventas-header reveal">
-            <h2>HABLEMOS DE <span>NEGOCIOS</span></h2>
-            <p>Únete a nuestra red. Ya sea que busques independizarte con un negocio probado o llevar nuestros productos a miles de nuevos clientes.</p>
+            <h2>MODELOS DE <br><span>COLABORACIÓN</span></h2>
+            <p>Integramos soluciones comerciales para cada tipo de aliado estratégico. Desarrolla y escala tu negocio bajo estándares industriales de excelencia.</p>
         </div>
         
-        <div class="ventas-grid">
-            <div class="venta-card reveal delay-1">
-                <div class="vc-icon">🚀</div>
-                <h3>Quiero Emprender</h3>
-                <p>Inicia tu propio negocio respaldado por el ecosistema, productos de alta calidad y la metodología comprobada de Mango BC. Minimiza riesgos y maximiza ganancias.</p>
-                <a href="emprendedores.html" class="btn-venta">Plan Emprendedor</a>
-            </div>
+        <div class="ventas-grid-dios reveal delay-1">
             
-            <div class="venta-card reveal delay-2">
-                <div class="vc-icon">🤝</div>
-                <h3>Quiero Distribuir</h3>
-                <p>Conviértete en distribuidor oficial. Accede a precios especiales por volumen, soporte logístico y representa líneas de producto líderes en el mercado retail.</p>
-                <a href="distribuidores.html" class="btn-venta">Plan Distribuidor</a>
+            <div class="venta-dios-card">
+                <h3 style="font-size: 1.6rem; color: var(--white); font-family: 'Montserrat'; font-weight: 900; margin-bottom: 8px; text-transform: uppercase;">Distribución Comercial</h3>
+                <p style="color: #AAA; font-size: 0.9rem; margin-bottom: 15px;">Para empresas o emprendedores con canales de venta establecidos que buscan líneas de alta demanda.</p>
+                
+                <ul class="vd-features">
+                    <li>Precios corporativos por volumen</li>
+                    <li>Soporte logístico directo a retail</li>
+                    <li>Acceso al catálogo de marcas líderes</li>
+                    <li>Material de apoyo comercial</li>
+                </ul>
+                <a href="distribuidores.html" class="btn-outline" style="width: 100%; margin-top: auto;">Plan de Distribución</a>
+            </div>
+
+            <div class="venta-dios-card glow-card" style="transform: scale(1.03); z-index: 2; background: var(--dark);">
+                <div class="vd-badge">Recomendado</div>
+                <h3 style="font-size: 1.8rem; color: var(--mango); font-family: 'Montserrat'; font-weight: 900; margin-bottom: 8px; text-transform: uppercase;">Desarrollo de Franquicia</h3>
+                <p style="color: #AAA; font-size: 0.9rem; margin-bottom: 15px;">El modelo ideal para operar un negocio estructurado con retorno de inversión proyectado y respaldo total.</p>
+                
+                <ul class="vd-features" style="font-weight: 600;">
+                    <li>Modelo operativo validado (ROI Acelerado)</li>
+                    <li>Capacitación integral y gerencial</li>
+                    <li>Proveeduría de insumos corporativa</li>
+                    <li>Asesoría y soporte técnico constante</li>
+                </ul>
+                <a href="emprendedores.html" class="btn-mango" style="width: 100%; margin-top: auto; font-size: 0.95rem;">Conocer Modelo</a>
+            </div>
+
+            <div class="venta-dios-card">
+                <h3 style="font-size: 1.6rem; color: var(--white); font-family: 'Montserrat'; font-weight: 900; margin-bottom: 8px; text-transform: uppercase;">Maquila / Marca Propia</h3>
+                <p style="color: #AAA; font-size: 0.9rem; margin-bottom: 15px;">Tercerización estratégica. Desarrollamos y fabricamos tu producto sin necesidad de infraestructura propia.</p>
+                
+                <ul class="vd-features">
+                    <li>Desarrollo y formulación de producto</li>
+                    <li>Maquila con certificaciones vigentes</li>
+                    <li>Acuerdos de confidencialidad absoluta</li>
+                    <li>Optimización de costos operativos</li>
+                </ul>
+                <a href="mailto:socios@mangobusiness.com" class="btn-outline" style="width: 100%; margin-top: auto;">Atención Corporativa</a>
+            </div>
+
+        </div>
+
+        <div class="prueba-social-ventas reveal delay-2">
+            <p>Empresas y directivos que confían en nuestro ecosistema</p>
+            <div class="testimonios-pill">
+                <div class="t-pill">
+                    <span class="t-stars">★★★★★</span>
+                    <span class="t-text">"Optimizar nuestra cadena de suministro con Mango BC fue un acierto estratégico." - Grupo M.</span>
+                </div>
+                <div class="t-pill">
+                    <span class="t-stars">★★★★★</span>
+                    <span class="t-text">"Calidad constante que respalda nuestra marca." - Director de Operaciones</span>
+                </div>
             </div>
         </div>
     </section>
