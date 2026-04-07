@@ -447,21 +447,25 @@
             display: flex; width: 94%; max-width: 1400px; height: 60vh; min-height: 500px; 
             gap: 15px; align-items: center; z-index: 2; margin: 0 auto; 
         }
-        
-        .brand-card { 
+.brand-card { 
             flex: 1; height: 100%; 
             background: #252525; 
             border-radius: 20px; 
             padding: 40px; display: flex; flex-direction: column; 
-            /* OPTIMIZACIÓN: Solo animamos flex, bordes y transform, redujimos tiempo a 0.5s */
             transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
             position: relative; 
             overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
             border: 1px solid rgba(255,255,255,0.05); 
             justify-content: flex-end; 
-            /* OPTIMIZACIÓN GPU */
+            
+            /* 🔥 EL HACK DE ACELERACIÓN HARDWARE EXTREMA 🔥 */
             will-change: flex, transform;
-            transform: translateZ(0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
         }
         
         .brand-card::before { 
@@ -524,10 +528,10 @@
         }
 
         /* =========================================================
-           5. NUEVA SECCIÓN DE VENTAS (MODIFICADA: CORPORATIVA Y COMPACTA)
+           5. NUEVA SECCIÓN DE VENTAS (GLOW SUTIL EN HOVER, TARJETAS IGUALES)
            ========================================================= */
         .seccion-ventas {
-            padding: 80px 5%; /* Ajustado para mejor visibilidad en un solo pantallazo */
+            padding: 80px 5%; 
             background-color: var(--dark);
             color: var(--white);
             position: relative;
@@ -535,11 +539,11 @@
             overflow: hidden;
         }
         .ventas-header {
-            margin-bottom: 50px; /* Reducido */
+            margin-bottom: 50px;
         }
         .ventas-header h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem); /* Fuente ligeramente más contenida */
+            font-size: clamp(2rem, 4vw, 3rem); 
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 15px;
@@ -555,45 +559,50 @@
             line-height: 1.6;
         }
         
-        .glow-card { position: relative; z-index: 1; }
-        .glow-card::before {
-            content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, var(--mango), #ff8a00, var(--mango));
-            z-index: -1; border-radius: 32px; filter: blur(12px); opacity: 0.7; transition: all 0.4s ease;
-        }
-        .glow-card:hover::before { opacity: 1; filter: blur(20px); top: -4px; left: -4px; right: -4px; bottom: -4px; }
-        
         .ventas-grid-dios { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 30px; /* Espaciado ajustado */
+            gap: 30px; 
             max-width: 1200px; 
             margin: 0 auto; 
             align-items: center;
         }
         
+        /* Todas las tarjetas son idénticas en diseño base */
         .venta-dios-card {
             background: rgba(28,28,28,0.95); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px; padding: 40px 30px; /* Padding reducido */
+            border-radius: 30px; padding: 40px 30px; 
             display: flex; flex-direction: column;
             transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
             position: relative; text-align: left;
             height: 100%;
+            z-index: 1;
         }
+        
+        /* El brillo inicia oculto */
+        .venta-dios-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, var(--mango), #ff8a00, var(--mango));
+            z-index: -1; border-radius: 32px; filter: blur(0px); opacity: 0; transition: all 0.4s ease;
+        }
+        
+        /* Al hacer hover, se activa un glow brillante pero controlado */
         .venta-dios-card:hover {
-            transform: translateY(-8px) translateZ(0); border-color: var(--mango); background: rgba(253, 234, 20, 0.05);
+            transform: translateY(-8px) translateZ(0); 
+            border-color: var(--mango); 
+            background: rgba(28, 28, 28, 1);
         }
-        .vd-badge {
-            position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
-            background: var(--mango); color: var(--dark); font-size: 0.75rem; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 1px; padding: 6px 20px; border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(253, 234, 20, 0.3);
+        .venta-dios-card:hover::before { 
+            opacity: 0.65; /* Subimos el brillo aquí */
+            filter: blur(14px); 
+            top: -4px; left: -4px; right: -4px; bottom: -4px; 
         }
+
         .vd-features { list-style: none; margin: 20px 0; padding: 0; flex-grow: 1; }
         .vd-features li { color: #DDD; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
         .vd-features li::before { content: '✓'; color: var(--mango); font-weight: 900; }
         
-        .prueba-social-ventas { margin-top: 50px; text-align: center; } /* Margen reducido */
+        .prueba-social-ventas { margin-top: 50px; text-align: center; } 
         .prueba-social-ventas p { color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 700; }
         .testimonios-pill { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
         .t-pill { background: rgba(255,255,255,0.05); padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px; transition: transform 0.3s; cursor: default; }
@@ -735,7 +744,6 @@
 
             /* Ajustes para la nueva sección de ventas en celular */
             .ventas-grid-dios { grid-template-columns: 1fr; gap: 30px; }
-            .venta-dios-card.glow-card { transform: scale(1); margin: 15px 0; }
             
             /* Ajustes para el acordeón en móviles */
             .job-header { flex-direction: column; text-align: center; gap: 15px; }
@@ -1016,55 +1024,55 @@
         </div>
     </section>
 
-    <section class="marcas-expansion" id="marcas">
+   <section class="marcas-expansion" id="marcas">
         <div class="reveal">
             <h2 class="section-title">NUESTRAS <br><span>MARCAS</span></h2>
         </div>
         
         <div class="bg-marquee"><div class="marquee-content">MANGO BUSINESS CENTER — MANGO BUSINESS CENTER — </div></div>
         
-        <div class="expansion-container">
+        <div class="expansion-container" style="will-change: transform;">
             
-            <div class="brand-card reveal delay-1">
+            <div class="brand-card" style="transform: translateZ(0);">
                 <div class="card-num"></div>
                 <h2>DELI BARRAS</h2>
-                <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="1mg.jpg" alt="Deli Barras" class="product-img img-main" fetchpriority="high">
                 <img src="2mg.jpg" alt="Deli Barras Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Snacks saludables líderes. Venta en línea y distribución minorista.</div>
                 <a href="Deli.html" class="card-btn">Distribución</a>
             </div>
             
-            <div class="brand-card reveal delay-2">
+            <div class="brand-card" style="transform: translateZ(0);">
                 <div class="card-num"></div>
                 <h2>SABOR MÍO</h2>
-                <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="SABOR-MÍO-UNO.jpg" alt="Sabor Mío" class="product-img img-main" fetchpriority="high">
                 <img src="SABOR-MÍO-DOS.jpg" alt="Sabor Mío Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Empanizadores y mezclas industriales de alta gama.</div>
                 <a href="#ventas" class="card-btn">Ver Catálogo</a>
             </div>
             
-            <div class="brand-card reveal delay-3">
+            <div class="brand-card" style="transform: translateZ(0);">
                 <div class="card-num"></div>
                 <h2>CAMPESINAS</h2>
-                <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="CAMPESINAS-UNO.jpg" alt="Campesinas" class="product-img img-main" fetchpriority="high">
                 <img src="CAMPESINAS-DOS.jpg" alt="Campesinas Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Repostería premium y galletas de receta tradicional.</div>
                 <a href="#ventas" class="card-btn">Puntos de Venta</a>
             </div>
             
-            <div class="brand-card reveal delay-4">
+            <div class="brand-card" style="transform: translateZ(0);">
                 <div class="card-num"></div>
                 <h2>NANNÁ</h2>
-                <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="nanna-uno.jpg" alt="Nanná" class="product-img img-main" fetchpriority="high">
                 <img src="nanna-dos.jpg" alt="Nanná Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Bebidas naturales y tecnología aplicada a la salud digestiva.</div>
                 <a href="#ventas" class="card-btn">Más Información</a>
             </div>
             
-             <div class="brand-card reveal delay-5">
+             <div class="brand-card" style="transform: translateZ(0);">
                 <div class="card-num"></div>
                 <h2>PRÓXIMAMENTE</h2>
-                <img src="proximamente.jpg" alt="Nuevos Lanzamientos" class="product-img img-main" loading="lazy" decoding="async">
+                <img src="proximamente.jpg" alt="Nuevos Lanzamientos" class="product-img img-main" fetchpriority="high">
                 <img src="nuevos productos.jpg" alt="Próximamente Hover" class="product-img img-hover" loading="lazy" decoding="async">
                 <div class="brand-desc">Descubre lo nuevo que tenemos preparado para ti este trimestre.</div>
                 <a href="#ventas" class="card-btn">Mantente al tanto</a>
@@ -1093,18 +1101,17 @@
                 <a href="distribuidores.html" class="btn-outline" style="width: 100%; margin-top: auto;">Plan de Distribución</a>
             </div>
 
-            <div class="venta-dios-card glow-card" style="transform: scale(1.03); z-index: 2; background: var(--dark);">
-                <div class="vd-badge">Recomendado</div>
-                <h3 style="font-size: 1.8rem; color: var(--mango); font-family: 'Montserrat'; font-weight: 900; margin-bottom: 8px; text-transform: uppercase;">Desarrollo de Franquicia</h3>
+            <div class="venta-dios-card">
+                <h3 style="font-size: 1.6rem; color: var(--white); font-family: 'Montserrat'; font-weight: 900; margin-bottom: 8px; text-transform: uppercase;">Desarrollo de Franquicia</h3>
                 <p style="color: #AAA; font-size: 0.9rem; margin-bottom: 15px;">El modelo ideal para operar un negocio estructurado con retorno de inversión proyectado y respaldo total.</p>
                 
-                <ul class="vd-features" style="font-weight: 600;">
+                <ul class="vd-features">
                     <li>Modelo operativo validado (ROI Acelerado)</li>
                     <li>Capacitación integral y gerencial</li>
                     <li>Proveeduría de insumos corporativa</li>
                     <li>Asesoría y soporte técnico constante</li>
                 </ul>
-                <a href="emprendedores.html" class="btn-mango" style="width: 100%; margin-top: auto; font-size: 0.95rem;">Conocer Modelo</a>
+                <a href="emprendedores.html" class="btn-outline" style="width: 100%; margin-top: auto;">Conocer Modelo</a>
             </div>
 
             <div class="venta-dios-card">
